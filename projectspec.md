@@ -50,9 +50,18 @@ encompasses the solution and not the project itself.
 7. Ability for users to add a review, this is analyzed in coherence to W3C
    recommendations.
 8. Implemented using MongoDB and react.
+9. Responsive
+10. Give the feeling of being Hipster, clean, modern
 
 
 # Division of labor
+
+We all split the work between each other but everyone has a different
+responsibility to make sure something happens. Viyan has the main responsibility
+of design, Marc is the project leader and Isak has the main responsibility back
+end.
+
+
 
 # Time plan
 

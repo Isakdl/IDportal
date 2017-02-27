@@ -1,3 +1,4 @@
+import '../imports/api/courses.js';
 import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {

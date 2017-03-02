@@ -4,7 +4,9 @@ import React, { Component, PropTypes } from 'react';
 export default class Course extends Component {
   render() {
     return (
-      <li>{this.props.course.title}</li>
+      <div>
+        <li>{this.props.course.title}</li>
+      </div>
     );
   }
 }

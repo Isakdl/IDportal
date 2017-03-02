@@ -6,6 +6,7 @@ import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 import { Courses } from '../api/courses.js';
 
 import CourseList from './components/courseList/courseList.jsx';
+import CreateCourse from './routes/createCourse/CreateCourse.jsx';
 
 // App component - represents the whole app
 class App extends Component {
@@ -17,6 +18,8 @@ class App extends Component {
           <h1>Kursportalen för ID</h1>
         </header>
 
+
+        <CreateCourse/>
         <AccountsUIWrapper />
 
         <CourseList courses={this.props.courses}/>

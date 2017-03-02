@@ -16,4 +16,5 @@ Course.propTypes = {
   title: PropTypes.object.isRequired,
   week: PropTypes.object.isRequired,
   studyrate: PropTypes.object.isRequired,
+  description: PropTypes.object.isRequired,
 };

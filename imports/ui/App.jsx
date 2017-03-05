@@ -17,9 +17,9 @@ class App extends Component {
         <header>
           <h1>Kursportalen för ID</h1>
         </header>
+        <li><a href="/create" class="active">Test</a></li>
+        
 
-
-        <CreateCourse/>
         <AccountsUIWrapper />
 
         <CourseList courses={this.props.courses}/>
@@ -27,7 +27,7 @@ class App extends Component {
     );
   }
 }
-
+//<li><Link to="/create">Create stuff</Link></li>
 App.propTypes = {
   courses: PropTypes.array.isRequired,
 };

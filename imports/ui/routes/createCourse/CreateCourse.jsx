@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { Courses } from './../../../api/courses';
+import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 
 // Task component - represents a single todo item
 export default class CreateCourse extends Component {
 
   handleSubmit()
   {
-    Courses.insert({title: "Databas kurs"});
+    const title = ReactDOM.findDOMNode(this.refs.name).value.trim();
+    Meteor.call('courses.insert', title);
   }
   render() {
     return (
@@ -15,8 +17,7 @@ export default class CreateCourse extends Component {
 
           <form className="new-course" onSubmit={this.handleSubmit.bind(this)} >
             Course name:
-            <input className="courseInput" type="Course name" ref="name" placeholder="Example"
-              onChange={this.handleSubmit.bind(this)}/>
+            <input className="courseInput" type="Course name" ref="name" placeholder="Example"/>
             Last name:
             <input className="courseInput" type="ECTS" ref="hp" placeholder="Example"/>
             Description:

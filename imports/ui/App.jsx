@@ -1,15 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
-import { Meteor } from 'meteor/meteor';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
-import { Courses } from '../api/courses.js';
-
-import CourseList from './components/courseList/courseList.jsx';
 import CreateCourse from './routes/createCourse/CreateCourse.jsx';
 
+import { Meteor } from 'meteor/meteor';
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+
 // App component - represents the whole app
-class App extends Component {
+export default class App extends Component {
 
   render() {
     return (
@@ -17,22 +15,17 @@ class App extends Component {
         <header>
           <h1>Kursportalen för ID</h1>
         </header>
+        <ul>
+          <li><a href="/create" className="active">Test</a></li>
+        </ul>
 
         <CreateCourse/>
         <AccountsUIWrapper />
 
-        <CourseList courses={this.props.courses}/>
+        {this.props.children}
       </div>
     );
   }
 }
-
-App.propTypes = {
-  courses: PropTypes.array.isRequired,
-};
-
-export default createContainer(() => {
-  return {
-    courses: Courses.find({}).fetch(),
-  };
-}, App);
+//<li><Link to="/create">Create stuff</Link></li>
+//<li><a href="/overview" class="active">Test</a></li>

@@ -7,6 +7,7 @@ import { Courses } from '../api/courses.js';
 import Course from './components/course/course.jsx';
 import CourseList from './components/courseList/courseList.jsx';
 import Header from './components/Header/Header.jsx'
+import CreateCourse from './routes/createCourse/CreateCourse.jsx';
 
 class App extends Component {
 
@@ -24,6 +25,9 @@ class App extends Component {
       <div className="container">
         <Header/>
 
+
+        <CreateCourse/>
+        <AccountsUIWrapper />
 
         
         <Course course={course} />

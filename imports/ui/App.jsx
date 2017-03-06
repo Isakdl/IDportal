@@ -3,13 +3,9 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import { Meteor } from 'meteor/meteor';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
-import { Courses } from '../api/courses.js';
-
-import CourseList from './components/courseList/courseList.jsx';
-import CreateCourse from './routes/createCourse/CreateCourse.jsx';
 
 // App component - represents the whole app
-class App extends Component {
+export default class App extends Component {
 
   render() {
     return (
@@ -17,23 +13,16 @@ class App extends Component {
         <header>
           <h1>Kursportalen för ID</h1>
         </header>
-        <li><a href="/create" class="active">Test</a></li>
-        
+        <ul>
+          <li><a href="/create" class="active">Test</a></li>
+        </ul>
 
         <AccountsUIWrapper />
 
-        <CourseList courses={this.props.courses}/>
+        {this.props.children}
       </div>
     );
   }
 }
 //<li><Link to="/create">Create stuff</Link></li>
-App.propTypes = {
-  courses: PropTypes.array.isRequired,
-};
-
-export default createContainer(() => {
-  return {
-    courses: Courses.find({}).fetch(),
-  };
-}, App);
+//<li><a href="/overview" class="active">Test</a></li>

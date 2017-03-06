@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 export default class NotFoundPage extends Component {
   render() {

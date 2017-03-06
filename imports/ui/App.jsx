@@ -18,7 +18,6 @@ class App extends Component {
           <h1>Kursportalen för ID</h1>
         </header>
 
-
         <CreateCourse/>
         <AccountsUIWrapper />
 

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Course from './course.jsx';
+import CourseItem from './courseItem.jsx';
 // Task component - represents a single todo item
 export default class CourseList extends Component {
 
@@ -15,7 +15,7 @@ export default class CourseList extends Component {
   getCourses(){
     return (
       this.props.courses.map((course) => (
-        <Course key={course._id} course={course} />
+        <CourseItem key={course._id} course={course} />
       ))
     );
   }

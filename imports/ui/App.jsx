@@ -26,8 +26,8 @@ class App extends Component {
         <Header/>
 
 
-        <CreateCourse/>
-        <AccountsUIWrapper />
+         <CreateCourse/>
+        
 
         
         <Course course={course} />

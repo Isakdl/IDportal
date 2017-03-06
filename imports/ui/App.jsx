@@ -9,7 +9,11 @@ import CourseList from './components/courseList/courseList.jsx';
 import Header from './components/Header/Header.jsx'
 import CreateCourse from './routes/createCourse/CreateCourse.jsx';
 
-class App extends Component {
+
+
+// App component - represents the whole app
+export default class App extends Component {
+
 
   render() {
     let course = {
@@ -23,25 +27,19 @@ class App extends Component {
     };
     return (
       <div className="container">
+
         <Header/>
 
-
-         <CreateCourse/>
         
 
         
         <Course course={course} />
+
+        {this.props.children}
+
       </div>
     );
   }
 }
-
-App.propTypes = {
-  courses: PropTypes.array.isRequired,
-};
-
-export default createContainer(() => {
-  return {
-    courses: Courses.find({}).fetch(),
-  };
-}, App);
+//<li><Link to="/create">Create stuff</Link></li>
+//<li><a href="/overview" class="active">Test</a></li>

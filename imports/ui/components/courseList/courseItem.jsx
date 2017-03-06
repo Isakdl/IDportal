@@ -1,19 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 
-
-export default class Course extends Component {
+// Task component - represents a single todo item
+export default class CourseItem extends Component {
   render() {
     return (
-  
- 
       <div>
         <li>{this.props.course.title}</li>
       </div>
-
     );
   }
 }
 
-Course.propTypes = {
+CourseItem.propTypes = {
   course: PropTypes.object.isRequired,
 };

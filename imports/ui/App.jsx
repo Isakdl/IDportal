@@ -3,7 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 
 import {browserHistory} from 'react-router';
 import { Meteor } from 'meteor/meteor';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+
 import { Courses } from '../api/courses.js';
 import Course from './components/course/course.jsx';
 import Header from './components/Header/Header.jsx'
@@ -27,11 +27,9 @@ export default class App extends Component {
     };
     return (
       <div className="container">
-   
         <Header/>
         <Course course={course} />
- 
-         
+
         {this.props.children}
       </div>
     );

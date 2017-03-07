@@ -1,3 +1,5 @@
+
+
 .container {
   max-width: 600px;
   margin: 0 auto;
@@ -6,30 +8,116 @@
   font-family: futura;
 
 }
- 
-header {/*KurserportalenID*/
+
+header {
   background: #d2edf4;
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
   padding: 30px 15px 15px 15px;
   position: relative;
 }
- 
+
+#login-buttons {
+  display: block;
+}
+form {
+  margin-top: 10px;
+  margin-bottom: -10px;
+  position: relative;
+}
+
+.new-task input {
+  box-sizing: border-box;
+  padding: 10px 0;
+  background: transparent;
+  border: none;
+  width: 100%;
+  padding-right: 80px;
+  font-size: 1em;
+}
+
+.new-task input:focus{
+  outline: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  background: white;
+}
+
+.delete {
+  float: right;
+  font-weight: bold;
+  background: none;
+  font-size: 1em;
+  border: none;
+  position: relative;
+}
+
+li {
+  position: relative;
+  list-style: none;
+  padding: 15px;
+  border-bottom: #eee solid 1px;
+}
+
+li .text {
+  margin-left: 10px;
+}
+
+li.checked {
+  color: #888;
+}
+
+li.checked .text {
+  text-decoration: line-through;
+}
+
+li.private {
+  background: #eee;
+  border-color: #ddd;
+}
+
+header .hide-completed {
+  float: right;
+}
+
+.toggle-private {
+  margin-left: 5px;
+}
+
+.containerCreateCourse {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.new-course {
+  display: flex;
+  flex-direction: column;
+}
+
+.courseInput {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 #login-buttons {/*sign in*/
  text-align:right;
   display: block;
   padding: 20px 15px 15px 15px;
   font-family: futura;
 }
- 
+
 .button_1{
 
-   background-color: black; 
+   background-color: black;
     border: none;
     color: white;
     padding: 16px 32px;
     /*text-align:right;*/
     /*text-align: center;*/
-    
+
     display: block;
     font-size: 16px;
     margin: 4px 2px;
@@ -79,7 +167,7 @@ h2{
 
   font-family: futura;
   padding: 10px;
-} 
+}
 
 .SectionWrapper{
   font-family: futura;
@@ -90,48 +178,17 @@ h2{
   font-family: futura;
   text-align: center;
 }
- 
 
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
- 
 @media (max-width: 600px) {
   li {
     padding: 12px 15px;
   }
- 
+
   .search {
     width: 150px;
     clear: both;
   }
- 
+
   .new-task input {
     padding-bottom: 5px;
   }

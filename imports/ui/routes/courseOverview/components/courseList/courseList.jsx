@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import CourseItem from './courseItem.jsx';
+import CourseItem from './courseItem';
+
 // Task component - represents a single todo item
 export default class CourseList extends Component {
 

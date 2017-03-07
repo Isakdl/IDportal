@@ -19,12 +19,11 @@ export class CourseOverview extends Component {
   }
 
   render() {
-    console.log("test");
     const filteredSearch = this.props.courses.filter (
         createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     return (
         <div className="container">
-          <SearchInput className="search-input" 
+          <SearchInput className="search-input"
             onChange={this.searchUpdated.bind(this)} />
           <CourseList courses={filteredSearch}/>
         </div>

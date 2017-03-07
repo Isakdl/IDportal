@@ -8,10 +8,15 @@
 }
  
 header {/*KurserportalenID*/
-  background: #d2edf4;
-  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
+ 
+     text-align: left;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 64px;
   padding: 30px 15px 15px 15px;
-  position: relative;
+  
 }
  
 #login-buttons {/*sign in*/

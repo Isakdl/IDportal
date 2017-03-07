@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import './style.css';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import constants from './../../../constants/apiConstants';

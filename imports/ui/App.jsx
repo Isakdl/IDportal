@@ -5,11 +5,8 @@ import {browserHistory} from 'react-router';
 import { Meteor } from 'meteor/meteor';
 
 import { Courses } from '../api/courses.js';
-import Course from './components/course/course.jsx';
 import Header from './components/Header/Header.jsx'
 import CreateCourse from './routes/createCourse/CreateCourse.jsx';
-
-import SearchBox from './components/SearchBox/SearchBox.jsx'
 
 // App component - represents the whole app
 export default class App extends Component {
@@ -28,8 +25,6 @@ export default class App extends Component {
     return (
       <div className="container">
         <Header/>
-        <Course course={course} />
-
         {this.props.children}
       </div>
     );

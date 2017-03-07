@@ -8,8 +8,6 @@ import { Courses } from '../api/courses.js';
 import Header from './components/Header/Header.jsx'
 import CreateCourse from './routes/createCourse/CreateCourse.jsx';
 
-import SearchBox from './components/SearchBox/SearchBox.jsx'
-
 // App component - represents the whole app
 export default class App extends Component {
 

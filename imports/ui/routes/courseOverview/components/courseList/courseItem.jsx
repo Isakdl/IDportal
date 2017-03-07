@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
-
+import './style.css';
 
 // Task component - represents a single todo item
 export default class CourseItem extends Component {
 
   render() {
     return (
-  
- 
-      <div>
+
+
+      <div className="courseItemContainer">
         <h2>{this.props.course.title}</h2>
         <button onClick={this.deleteCourse.bind(this)}>Delete</button>
       </div>

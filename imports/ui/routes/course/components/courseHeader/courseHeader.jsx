@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import './style.css';
+
 export default class CourseHeader extends Component {
   render() {
     return (
       		<section id= "course_1">
 					<h1>{this.props.title}</h1>
-					
+
 					<nav id= "quickfacts">
 						<ul className="quickfacts_course_1">
 							<li>{this.props.hp}</li>

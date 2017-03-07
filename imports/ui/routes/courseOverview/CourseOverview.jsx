@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import './style.css';
+
 import { createContainer } from 'meteor/react-meteor-data';
 
 import ReactDOM from "react-dom";

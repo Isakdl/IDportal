@@ -8,17 +8,16 @@ export default class Header extends Component {
     return (
 
       <div className ="Header">
-        
+
          <header>
           <h2>ID Portal</h2>
           <AccountsUIWrapper/>
-          <button className = "button_1" Click={this.clicked}> Courses </button>
+          <button className="button_1" > Courses </button>
         </header>
-			   
+
 
       </div>
 
     );
   }
 }
-

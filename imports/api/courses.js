@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
+
 export const Courses = new Mongo.Collection('courses');
 
 
@@ -20,14 +21,12 @@ Meteor.methods({
   },
   'courses.remove'(courseId) {
     check(courseId, String);
-    Tasks.remove(courseId);
-  },
-  'courses.setChecked'(courseId, setChecked) {
 
-    check(courseId, String);
-    check(setChecked, Boolean);
+    if(!this.userId || !Meteor.user().profile.admin){
+      throw new Meteor.Error('not-authorized');
+    }
 
-    Tasks.update(courseId, { $set: { checked: setChecked } });
+    Courses.remove(courseId);
   },
-  
+
 });

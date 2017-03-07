@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
-
+import constants from './../../../constants/apiConstants';
 // Task component - represents a single todo item
 export default class CreateCourse extends Component {
 
   handleSubmit()
   {
     const title = ReactDOM.findDOMNode(this.refs.name).value.trim();
-    Meteor.call('courses.insert', title);
+    Meteor.call(constants.COURSES_INSERT, title);
   }
   render() {
     return (

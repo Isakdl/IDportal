@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import './style.css';
+
 export default class Comment extends Component {
   render() {
     return (
@@ -7,7 +9,7 @@ export default class Comment extends Component {
 			   <p>{this.props.commment.text}</p>
 			   <p>{this.props.commment.user}</p>
 			   <p>{this.props.commment.vote}</p>
-			   
+
 
       </div>
 

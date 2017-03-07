@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import './style.css';
+
 
 export default class NotFoundPage extends Component {
   render() {

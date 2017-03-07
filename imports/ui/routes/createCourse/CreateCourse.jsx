@@ -1,32 +1,35 @@
 import React, { Component, PropTypes } from 'react';
+import './style.css';
+import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
+import constants from './../../../constants/apiConstants';
 // Task component - represents a single todo item
 export default class CreateCourse extends Component {
 
   handleSubmit()
   {
-
+    const title = ReactDOM.findDOMNode(this.refs.name).value.trim();
+    Meteor.call(constants.COURSES_INSERT, title);
   }
   render() {
     return (
-        <div className="container">
-        <h1>Create Course</h1>
+        <div className="containerCreateCourse">
+          <h1>Create Course</h1>
 
           <form className="new-course" onSubmit={this.handleSubmit.bind(this)} >
             Course name:
-            <input type="Course name" ref="name" placeholder="Example" 
-              onChange={this.handleSubmit.bind(this)}/>
+            <input className="courseInput" type="Course name" ref="name" placeholder="Example"/>
             Last name:
-            <input type="ECTS" ref="hp" placeholder="Example"/>
+            <input className="courseInput" type="ECTS" ref="hp" placeholder="Example"/>
             Description:
-            <input type="Description" ref="description" placeholder="Example"/>
+            <input className="courseInput" type="Description" ref="description" placeholder="Example"/>
             Webpage:
-            <input type="Webpage" ref="url" placeholder="Example"/>
+            <input className="courseInput" type="Webpage" ref="url" placeholder="Example"/>
             Period:
-            <input type="Period" ref="period" placeholder="Example"/>
-            <input type="submit" value="Submit"/>
+            <input className="courseInput" type="Period" ref="period" placeholder="Example"/>
+            <input className="courseInput" type="submit" value="Submit"/>
           </form>
         </div>
     );
   }
 }
-

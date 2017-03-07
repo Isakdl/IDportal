@@ -1,4 +1,7 @@
 import React, { Component, PropTypes } from 'react';
+import './style.css';
+
+
 export default class CourseAbout extends Component {
   render() {
     return (
@@ -13,5 +16,5 @@ export default class CourseAbout extends Component {
 
 CourseAbout.propTypes = {
   info: PropTypes.string.isRequired,
- 
+
 };

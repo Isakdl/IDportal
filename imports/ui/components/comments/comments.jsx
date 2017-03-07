@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react';
+import './style.css';
+
 export default class Comments extends Component {
   render() {
     return (
@@ -13,5 +15,5 @@ export default class Comments extends Component {
 
 Comments.propTypes = {
   comments: PropTypes.array.isRequired,
- 
+
 };

@@ -9,7 +9,7 @@ Meteor.methods({
   'courses.insert'(title) {
     check(title, String);
     // Make sure the user is logged in before inserting a task
-    
+
     if (!this.userId) {
       throw new Meteor.Error('not-authorized');
     }
@@ -18,7 +18,6 @@ Meteor.methods({
       title,
     });
   },
-  /*
   'courses.remove'(courseId) {
     check(courseId, String);
     Tasks.remove(courseId);
@@ -30,5 +29,5 @@ Meteor.methods({
 
     Tasks.update(courseId, { $set: { checked: setChecked } });
   },
-  */
+  
 });

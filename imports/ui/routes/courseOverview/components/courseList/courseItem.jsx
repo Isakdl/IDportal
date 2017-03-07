@@ -16,6 +16,6 @@ export default class CourseItem extends Component {
   }
 }
 
-Course.propTypes = {
+CourseItem.propTypes = {
   course: PropTypes.object.isRequired,
 };

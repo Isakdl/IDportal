@@ -10,7 +10,7 @@ import { Courses } from '../../../api/courses.js';
 import SearchInput, {createFilter} from 'react-search-input'
 import CourseList from './components/courseList/courseList.jsx';
 
-const KEYS_TO_FILTERS = ['course']
+const KEYS_TO_FILTERS = ['title']
 
 // Task component - represents a single todo item
 export class CourseOverview extends Component {

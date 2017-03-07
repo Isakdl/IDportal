@@ -15,7 +15,6 @@ export class CourseOverview extends Component {
     return (
         <div className="container">
           <CourseList courses={this.props.courses}/>
-
         </div>
     );
   }

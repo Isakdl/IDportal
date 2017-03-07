@@ -8,11 +8,7 @@ import { Courses } from '../api/courses.js';
 import Header from './components/Header/Header.jsx'
 import CreateCourse from './routes/createCourse/CreateCourse.jsx';
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> master
 // App component - represents the whole app
 export default class App extends Component {
 
@@ -24,9 +20,9 @@ export default class App extends Component {
       level: "Avancerad",
       period:"fall",
       info: "information",
-      text:"Comments",
+      text:"Comments",}
 
-    };
+   
     return (
       <div className="container">
         <Header/>

@@ -1,4 +1,4 @@
-
+/*
 
 .container {
   max-width: 600px;
@@ -8,29 +8,18 @@
   font-family: futura;
 
 }
-<<<<<<< HEAD
- 
-header {/*KurserportalenID*/
- 
-     text-align: left;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 64px;
-=======
 
 header {
-  background: #d2edf4;
+ /* background: #d2edf4;
   background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
->>>>>>> master
-  padding: 30px 15px 15px 15px;
+  padding: 30px 15px 15px 15px;*/
   
-}
+/*}
 
 #login-buttons {
   display: block;
 }
+
 form {
   margin-top: 10px;
   margin-bottom: -10px;
@@ -115,7 +104,7 @@ header .hide-completed {
 }
 
 #login-buttons {/*sign in*/
- text-align:right;
+ /*text-align:right;
   display: block;
   padding: 20px 15px 15px 15px;
   font-family: futura;
@@ -130,15 +119,15 @@ header .hide-completed {
     /*text-align:right;*/
     /*text-align: center;*/
 
-    display: block;
+    /*display: block;
     font-size: 16px;
     margin: 4px 2px;
     border-radius: 8px;
     cursor: pointer;
     font-family: futura;
-}
+}*/
 
-.button_1:hover{
+/*.button_1:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
@@ -205,3 +194,4 @@ h2{
     padding-bottom: 5px;
   }
 }
+*/

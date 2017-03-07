@@ -20,6 +20,7 @@ Meteor.methods({
       description,
       url,
       period,
+      score: 0,
     });
   },
   'courses.remove'(courseId) {
@@ -31,5 +32,25 @@ Meteor.methods({
 
     Courses.remove(courseId);
   },
+  'courses.upvote'(courseId) {
+
+    let course = Courses.find(courseId).fetch();
+
+    if(course == null || course.length > 1){
+      throw new Meteor.Error('invalid course ID');
+    }
+
+    Courses.update(courseId, {$set: {score: course[0].score + 1}});
+
+  },
+  'courses.downvote'(courseId) {
+    let course = Courses.find(courseId).fetch();
+
+    if(course == null || course.length > 1){
+      throw new Meteor.Error('invalid course ID');
+    }
+    
+    Courses.update(courseId, {$set: {score: course[0].score - 1}});
+  }
 
 });

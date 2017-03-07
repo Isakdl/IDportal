@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Meteor } from 'meteor/meteor';
 import './style.css';
+import constants from './../../../../../constants/apiConstants';
 
 //import ArrowDown from ;
 //<img src='./../../../../../assets/ic_keyboard_arrow_down_black_24px.svg' />
@@ -22,9 +23,9 @@ export default class CourseItem extends Component {
             </div>
           </div>
           <div className="courseScoreBox">
-            <button>UP</button>
-            {this.props.course.score}67
-            <button>DOWN</button>
+            <button onClick={this.upvote.bind(this)}>UP</button>
+            {this.props.course.score}
+            <button onClick={this.downvote.bind(this)}>DOWN</button>
           </div>
 
         </div>
@@ -48,8 +49,16 @@ export default class CourseItem extends Component {
 
   }
 
+  upvote(){
+    Meteor.call(constants.COURSE_UPVOTE, this.props.course._id);
+  }
+
+  downvote(){
+    Meteor.call(constants.COURSE_DOWNVOTE, this.props.course._id);
+  }
+
   deleteCourse(){
-    Meteor.call('courses.remove', this.props.course._id);
+    Meteor.call(constants.COURSE_REMOVE, this.props.course._id);
   }
 
   editCourse(){

@@ -9,7 +9,6 @@ export const Courses = new Mongo.Collection('courses');
 Meteor.methods({
   'courses.insert'(title) {
     check(title, String);
-    // Make sure the user is logged in before inserting a task
 
     if (!this.userId) {
       throw new Meteor.Error('not-authorized');

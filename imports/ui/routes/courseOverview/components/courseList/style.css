@@ -1,7 +1,39 @@
+.courseWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .courseItemContainer {
   border-style: solid;
   border-width: 1px;
-  border-color: #000000;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  border-color: rgba(0, 0, 0, 0.24);
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.courseTextInfoBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.courseInfoExtras {
+  display: flex;
+  flex-direction: row;
+}
+
+.courseScoreBox {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.courseAdminButtonContainer {
+  margin-top: 8px;
+  align-self: flex-end;
 }

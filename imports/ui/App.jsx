@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
+import {browserHistory} from 'react-router';
 import { Meteor } from 'meteor/meteor';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 import { Courses } from '../api/courses.js';
@@ -26,8 +27,11 @@ export default class App extends Component {
     };
     return (
       <div className="container">
+   
         <Header/>
         <Course course={course} />
+ 
+         
         {this.props.children}
       </div>
     );

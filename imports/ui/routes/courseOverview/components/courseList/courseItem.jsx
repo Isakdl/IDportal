@@ -11,7 +11,7 @@ export default class CourseItem extends Component {
   render() {
     return (
 
-      <div onClick={this.props.onClick} className="courseItemContainer">
+      <div onClick={this.onClick.bind(this)} className="courseItemContainer">
 
         <div className="courseWrapper">
           <div className="courseTextInfoBox">
@@ -47,6 +47,10 @@ export default class CourseItem extends Component {
 
     return null;
 
+  }
+
+  onClick(){
+    this.props.onClick(this.props.course);
   }
 
   upvote(){

@@ -1,21 +1,19 @@
 import React, { Component, PropTypes } from 'react';
-import CourseHeader from './courseHeader/courseHeader.jsx';
-import CourseAbout from './courseAbout/courseAbout.jsx';
-import CommentSection from './CommentSection/CommentSection.jsx';
+import CourseHeader from './components/courseHeader/courseHeader.jsx';
+import CourseAbout from './components/courseAbout/courseAbout.jsx';
+import CourseComments from './components/courseComments/courseComments.jsx';
 import './style.css';
 
 export default class Course extends Component {
   render() {
     return (
-
-
-	    <div className ="content">
+    <div className ="content">
 			<CourseHeader title={this.props.course.title}
 				hp={this.props.course.hp}
 				level= {this.props.course.level}
 				period={this.props.course.period}/>
 			<CourseAbout info={this.props.course.info}/>
-			<CommentSection text={this.props.text}/>
+			<CourseComments text={this.props.text}/>
 
 			<section id= "course_2"></section>
 			<section id= "course_3"></section>
@@ -28,5 +26,5 @@ export default class Course extends Component {
 }
 
 Course.propTypes = {
-  course: PropTypes.object.isRequired,
+  //course: PropTypes.object.isRequired,
 };

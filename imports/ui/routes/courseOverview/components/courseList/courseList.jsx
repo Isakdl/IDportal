@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import CourseItem from './courseItem.jsx';
+import { Router, browserHistory } from 'react-router';
 import './style.css';
 
 // Task component - represents a single todo item
@@ -22,10 +23,8 @@ export default class CourseList extends Component {
     );
   }
 
-  onClickCourse(event){
-    console.log("Clicked course");
-    event.stopPropagation();
-
+  onClickCourse(course){
+    browserHistory.push('/course');
   }
 
 }

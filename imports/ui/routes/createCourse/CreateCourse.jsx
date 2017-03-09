@@ -6,50 +6,101 @@ import constants from './../../../constants/apiConstants';
 // Task component - represents a single todo item
 export default class CreateCourse extends Component {
 
-  handleSubmit()
+  componentWillMount()
   {
-    const title = ReactDOM.findDOMNode(this.refs.name).value.trim();
-    const hp = ReactDOM.findDOMNode(this.refs.hp).value.trim();
-    const speed = ReactDOM.findDOMNode(this.refs.speed).value.trim();
-    const description = 
-      ReactDOM.findDOMNode(this.refs.description).value.trim();
-    const url = ReactDOM.findDOMNode(this.refs.url).value.trim();
-    const period = ReactDOM.findDOMNode(this.refs.period).value.trim();
-    Meteor.call(constants.COURSES_INSERT, title, hp, speed, description, url,
-        period);
-  
-  }
-  renderOptions() 
-  {
-    for (i=1; i<4; i++) 
+    this.state = 
     {
+      title              : '',
+      isTitleValid       : true,
+      ects               : '',
+      isEctsValid        : true,
+      speed              : '',
+      isSpeedValid       : true,
+      description        : '',
+      isDescriptionValid : true,
+      url                : '',
+      isUrlValid         : true
     }
   }
+
+  
+  isValidMinLength(length, s, sId) {
+
+    (s.length > length) ? this.setState({[sId] : true})
+                          : this.setState({[sId] : false})
+  }
+
+
+  handleSubmit(event)
+  {
+    ts = this.state
+
+    if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid 
+                     && ts.isDescriptionValid && ts.isUrlValid)
+    {
+    Meteor.call(constants.COURSES_INSERT, ts.title, ts.ects, ts.speed, 
+        ts.description, ts.url, this.refs.period);
+    }   
+  }
+
   render() {
     return (
         <div className="containerCreateCourse">
           <h1>Create Course</h1>
-
           <form className="new-course" >
-            Course name:
-            <input className="courseInput" type="text" ref="name" 
-              placeholder="Prototyputveckling av mobila applikationer" min="4" 
-              max="250"/>
-            ECTS:
-            <input className="courseInput" type="text" ref="ects" min="1" max="3"
+            <font color={this.state.isTitleValid ? "black" : "red"}>
+              Course Title:
+            </font>
+            <input className="courseInput" type="text" name="title" 
+              onChange={(e) => this.setState({title:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (1, this.state.title
+                                                   ,"isTitleValid")}
+              style={{borderColor:this.state.isTitleValid ? "gray" : "red"}}
+              placeholder="Prototyputveckling av mobila applikationer" />
+
+            <font color={this.state.isEctsValid ? "black" : "red"}>
+              ECTS:
+            </font>
+            <input className="courseInput" type="text" name="ects" 
+              onChange={(e) => this.setState({ects:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (1, this.state.ects
+                                                   , "isEctsValid")}
+              style={{borderColor:this.state.isEctsValid ? "gray" : "red"}}
               placeholder="7.5"/>
-            Speed:
-            <input className="courseInput" type="text" ref="speed" min="3" max="3"
+
+            <font color={this.state.isSpeedValid ? "black" : "red"}>
+              Speed:
+            </font>
+            <input className="courseInput" type="text" name="speed" 
+              onChange={(e) => this.setState({speed:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (5, this.state.speed
+                                                   , "isSpeedValid")}
+              style={{borderColor:this.state.isSpeedValid ? "gray" : "red"}}
               placeholder="50%"/>
-            Description:
-            <input className="courseInput" type="text" ref="description" max="2000"
+
+            <font color={this.state.isDescriptionValid ? "black" : "red"}>
+              Description:
+            </font>
+            <input className="courseInput" type="text" name="description"  
+              onChange={(e) => this.setState({description:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (5, this.state.description
+                                                   ,"isDescriptionValid")}
+              style={{borderColor:this.state.isDescriptionValid ? "gray" : "red"}}
               placeholder="Example"/>
-            Webpage:
-            <input className="courseInput" type="text" ref="url" max="2000"
+
+            <font color={this.state.isUrlValid ? "black" : "red"}>
+              Webpage:
+            </font>
+            <input className="courseInput" type="text" name="url" max="2000"
+              onChange={(e) => this.setState({url:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (5, this.state.url
+                                                   ,"isUrlValid")}
+              style={{borderColor:this.state.isUrlValid ? "gray" : "red"}}
               placeholder="https://www.umu.se/utbildning/kurser/prototyputveckling-for-mobila-applikationer/"/>
+
             Period:
 
-            <select className="courseInput">
+            <select className="courseInput" name="period">
               <option value="block1">Block 1</option>
               <option value="block1a">Block 1a</option>
               <option value="block1b">Block 1b</option>
@@ -64,7 +115,7 @@ export default class CreateCourse extends Component {
               <option value="block4b">Block 4b</option>
             </select>
   
-            <input type="button" onClick={this.handleSubmit.bind(this)} 
+            <input type="button" onClick={(e) => this.handleSubmit(e)} 
               value="Submit"/>
           </form>
         </div>

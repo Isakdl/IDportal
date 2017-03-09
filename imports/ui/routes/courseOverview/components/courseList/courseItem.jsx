@@ -11,21 +11,21 @@ export default class CourseItem extends Component {
   render() {
     return (
 
-      <div className="courseItemContainer">
+      <div onClick={this.props.onClick} className="courseItemContainer">
 
         <div className="courseWrapper">
           <div className="courseTextInfoBox">
-            {this.props.course.title}
+            <p className="courseInfoTitle">{this.props.course.title}</p>
             <div className="courseInfoExtras">
-              {this.props.course.ects}
-              {this.props.course.period}
-              {this.props.course.speed}
+              <p className="courseInfoText">{this.props.course.ects} hp</p>
+              <p className="courseInfoText">{this.props.course.period}</p>
+              <p className="courseInfoText">{this.props.course.speed}</p>
             </div>
           </div>
           <div className="courseScoreBox">
-            <button onClick={this.upvote.bind(this)}>UP</button>
+            <button onClick={(proxy) => {proxy.stopPropagation(); this.upvote()}}>UP</button>
             {this.props.course.score}
-            <button onClick={this.downvote.bind(this)}>DOWN</button>
+            <button onClick={(proxy) => {proxy.stopPropagation(); this.downvote()}}>DOWN</button>
           </div>
 
         </div>
@@ -39,8 +39,8 @@ export default class CourseItem extends Component {
     if(Meteor.user() && Meteor.user().profile.admin){
       return (
         <div className="courseAdminButtonContainer">
-          <button onClick={this.editCourse.bind(this)}>Edit</button>
-          <button onClick={this.deleteCourse.bind(this)}>Delete</button>
+          <button onClick={(proxy) => {proxy.stopPropagation(); this.editCourse()}}>Edit</button>
+          <button onClick={(proxy) => {proxy.stopPropagation(); this.deleteCourse()}}>Delete</button>
         </div>
       );
     }

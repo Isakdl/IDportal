@@ -17,10 +17,17 @@ export default class CourseList extends Component {
   getCourses(){
     return (
       this.props.courses.map((course) => (
-        <CourseItem key={course._id} course={course} />
+        <CourseItem key={course._id} course={course} onClick={this.onClickCourse.bind(this)} />
       ))
     );
   }
+
+  onClickCourse(event){
+    console.log("Clicked course");
+    event.stopPropagation();
+
+  }
+
 }
 
 CourseList.propTypes = {

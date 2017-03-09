@@ -6,49 +6,98 @@ import constants from './../../../constants/apiConstants';
 // Task component - represents a single todo item
 export default class CreateCourse extends Component {
 
+  componentWillMount()
+  {
+    this.state = 
+    {
+      title              : '',
+      isTitleValid       : true,
+      ects               : '',
+      isEctsValid        : true,
+      speed              : '',
+      isSpeedValid       : true,
+      description        : '',
+      isDescriptionValid : true,
+      url                : '',
+      isUrlValid         : true
+    }
+  }
+
+  
+  isValidMinLength(length, s, sId) {
+
+    (s.length > length) ? this.setState({[sId] : true})
+                          : this.setState({[sId] : false})
+  }
+
+
   handleSubmit(event)
   {
-    const target = event.target;
-    const title = target.title.trim();
-    const ects = target.ects.trim();
-    const speed = target.speed.trim();
-    const url = target.url.trim();
-    const period = target.period.trim();
-    
-    if (failed)
+    ts = this.state
+
+    if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid 
+                     && ts.isDescriptionValid && ts.isUrlValid)
     {
-      this.setState(
-      {
-        
-      });
-    }
-    Meteor.call(constants.COURSES_INSERT, title, ects, speed, description, url,
-        period);
-  
+    Meteor.call(constants.COURSES_INSERT, ts.title, ts.ects, ts.speed, 
+        ts.description, ts.url, this.refs.period);
+    }   
   }
 
   render() {
     return (
         <div className="containerCreateCourse">
           <h1>Create Course</h1>
-
           <form className="new-course" >
-            Course name:
+            <font color={this.state.isTitleValid ? "black" : "red"}>
+              Course Title:
+            </font>
             <input className="courseInput" type="text" name="title" 
-              placeholder="Prototyputveckling av mobila applikationer" min="4" 
-              max="250"/>
-            ECTS:
-            <input className="courseInput" type="text" name="ects" min="1" max="3"
+              onChange={(e) => this.setState({title:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (1, this.state.title
+                                                   ,"isTitleValid")}
+              style={{borderColor:this.state.isTitleValid ? "gray" : "red"}}
+              placeholder="Prototyputveckling av mobila applikationer" />
+
+            <font color={this.state.isEctsValid ? "black" : "red"}>
+              ECTS:
+            </font>
+            <input className="courseInput" type="text" name="ects" 
+              onChange={(e) => this.setState({ects:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (1, this.state.ects
+                                                   , "isEctsValid")}
+              style={{borderColor:this.state.isEctsValid ? "gray" : "red"}}
               placeholder="7.5"/>
-            Speed:
-            <input className="courseInput" type="text" name="speed" min="3" max="3"
+
+            <font color={this.state.isSpeedValid ? "black" : "red"}>
+              Speed:
+            </font>
+            <input className="courseInput" type="text" name="speed" 
+              onChange={(e) => this.setState({speed:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (5, this.state.speed
+                                                   , "isSpeedValid")}
+              style={{borderColor:this.state.isSpeedValid ? "gray" : "red"}}
               placeholder="50%"/>
-            Description:
-            <input className="courseInput" type="text" name="description" max="2000"
+
+            <font color={this.state.isDescriptionValid ? "black" : "red"}>
+              Description:
+            </font>
+            <input className="courseInput" type="text" name="description"  
+              onChange={(e) => this.setState({description:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (5, this.state.description
+                                                   ,"isDescriptionValid")}
+              style={{borderColor:this.state.isDescriptionValid ? "gray" : "red"}}
               placeholder="Example"/>
-            Webpage:
+
+            <font color={this.state.isUrlValid ? "black" : "red"}>
+              Webpage:
+            </font>
             <input className="courseInput" type="text" name="url" max="2000"
+              onChange={(e) => this.setState({url:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (5, this.state.url
+                                                   ,"isUrlValid")}
+              style={{borderColor:this.state.isUrlValid ? "gray" : "red"}}
               placeholder="https://www.umu.se/utbildning/kurser/prototyputveckling-for-mobila-applikationer/"/>
+
             Period:
 
             <select className="courseInput" name="period">
@@ -66,7 +115,7 @@ export default class CreateCourse extends Component {
               <option value="block4b">Block 4b</option>
             </select>
   
-            <input type="button" onClick={() => this.handleSubmit()} 
+            <input type="button" onClick={(e) => this.handleSubmit(e)} 
               value="Submit"/>
           </form>
         </div>

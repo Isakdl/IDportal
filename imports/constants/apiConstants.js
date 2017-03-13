@@ -12,3 +12,5 @@ export const REVIEWS_EDIT                               = 'reviews.edit';
 export const REVIEWS_REPLY                              = 'reviews.reply';
 export const REVIEWS_UPVOTE                             = 'reviews.upvote';
 export const REVIEWS_DOWNVOTE                           = 'reviews.downvote';
+export const REVIEWS_COURSE_FETCH                       = 'reviews.course.fetch';
+export const REVIEWS_USER_FETCH                         = 'reviews.user.fetch';

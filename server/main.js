@@ -14,6 +14,7 @@ Meteor.startup(() => {
 
     user.profile.admin = true;
     user.profile.courseVotes = [];
+    user.profile.reviewVotes = [];
 
     return user;
   });

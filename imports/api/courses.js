@@ -11,7 +11,7 @@ const vote = (courseId, voteChange) => {
   if(!(voteChange === 1 || voteChange === -1)){
     throw new Meteor.Error('invalid vote type');
   }
-  
+
   let course = Courses.find(courseId).fetch();
 
   if(course == null || course.length > 1){
@@ -46,7 +46,7 @@ const vote = (courseId, voteChange) => {
 }
 
 Meteor.methods({
-  'courses.insert'(title, ects, speed, description, url, period) {
+  'courses.insert'(title, level, ects, speed, description, url, period) {
     check(title, String);
 
     if (!this.userId) {
@@ -55,6 +55,7 @@ Meteor.methods({
 
     Courses.insert({
       title,
+      level,
       ects,
       speed,
       description,

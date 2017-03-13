@@ -41,7 +41,7 @@ export default class CreateCourse extends Component {
     if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid
                      && ts.isDescriptionValid && ts.isUrlValid && ts.isLevelValid)
     {
-    Meteor.call(constants.COURSES_INSERT, ts.title, ts.ects, ts.speed,
+    Meteor.call(constants.COURSES_INSERT, ts.title, ts.level, ts.ects, ts.speed,
         ts.description, ts.url, this.refs.period);
     }
   }

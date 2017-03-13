@@ -1,12 +1,27 @@
 import React, { Component, PropTypes } from 'react';
 import AccountsUIWrapper from '../login/AccountsUIWrapper.jsx';
 import './style.css';
+import { browserHistory } from 'react-router';
+import { Meteor } from 'meteor/meteor';
 
 
 export default class Header extends Component {
- clicked(){
-  console.log('Courses of ID ')
- }
+  clicked(){
+    console.log('Courses of ID ')
+  }
+  createCourse() {
+    if(Meteor.user() && Meteor.user().profile.admin) {
+      return (
+          <button 
+            onClick={() => browserHistory.push('create')}
+            className="button_1"> 
+            Create Course 
+          </button>
+      );
+    }
+
+    return null;
+  }
   render() {
     return (
 
@@ -15,7 +30,13 @@ export default class Header extends Component {
          <header>
           <h2>ID Portal</h2>
           <AccountsUIWrapper/>
-          <button className="button_1" > Courses </button>
+          <button 
+            onClick={() => browserHistory.push('/')}
+            className="button_1"> 
+            Home
+          </button>
+          {this.createCourse()}
+          
         </header>
 
 
@@ -24,3 +45,5 @@ export default class Header extends Component {
     );
   }
 }
+
+

@@ -8,17 +8,20 @@ export default class CreateCourse extends Component {
 
   componentWillMount()
   {
+    let course = this.props.course
     this.state = 
     {
-      title              : '',
+      title              : course? course.title : '',
       isTitleValid       : true,
-      ects               : '',
+      level              : course? course.level : '',
+      isLevelValid       : true,
+      ects               : course? course.ects : '',
       isEctsValid        : true,
-      speed              : '',
+      speed              : course? course.speed : '',
       isSpeedValid       : true,
-      description        : '',
+      description        : course? course.description : '',
       isDescriptionValid : true,
-      url                : '',
+      url                : course? course.url : '',
       isUrlValid         : true
     }
   }
@@ -36,7 +39,7 @@ export default class CreateCourse extends Component {
     ts = this.state
 
     if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid 
-                     && ts.isDescriptionValid && ts.isUrlValid)
+                     && ts.isDescriptionValid && ts.isUrlValid && isLevelValid)
     {
     Meteor.call(constants.COURSES_INSERT, ts.title, ts.ects, ts.speed, 
         ts.description, ts.url, this.refs.period);
@@ -57,6 +60,16 @@ export default class CreateCourse extends Component {
                                                    ,"isTitleValid")}
               style={{borderColor:this.state.isTitleValid ? "gray" : "red"}}
               placeholder="Prototyputveckling av mobila applikationer" />
+
+            <font color={this.state.isLevelValid ? "black" : "red"}>
+              Level:
+            </font>
+            <input className="courseInput" type="text" name="ects" 
+              onChange={(e) => this.setState({level:e.target.value})}
+              onBlur={(e) => this.isValidMinLength (1, this.state.level
+                                                   , "isLevelValid")}
+              style={{borderColor:this.state.isLevelValid ? "gray" : "red"}}
+              placeholder="A"/>
 
             <font color={this.state.isEctsValid ? "black" : "red"}>
               ECTS:
@@ -122,3 +135,7 @@ export default class CreateCourse extends Component {
     );
   }
 }
+
+CreateCourse.propTypes = {
+  course: PropTypes.object,
+};

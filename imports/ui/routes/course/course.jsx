@@ -51,8 +51,7 @@ Course.propTypes = {
 };
 
 export default createContainer(({course}) => {
-  let reviews = Reviews.find({courseId: course._id}).fetch();
-  console.log(reviews)
+  let reviews = Reviews.find({courseId: course._id}, {sort: {score: -1}}).fetch();
   return {
     comments: reviews ? reviews : [],
   };

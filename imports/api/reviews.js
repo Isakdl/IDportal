@@ -56,15 +56,17 @@ Meteor.methods({
 
   },
   'reviews.upvote'(reviewId){
-    if(!this.userId)){
+    if(!this.userId){
       throw new Meteor.Error('not-authorized');
     }
+    
     vote(reviewId, 1);
   },
   'reviews.downvote'(reviewId){
-    if(!this.userId)){
+    if(!this.userId){
       throw new Meteor.Error('not-authorized');
     }
+
     vote(reviewId, -1);
   },
 });

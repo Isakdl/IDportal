@@ -14,7 +14,9 @@ export default class Comment extends Component {
             <div className="commentTextBox">
               <p className="commentText">{this.props.comment.text}</p>
             </div>
-            <p className="commentUsername">Written by: {this.props.comment.username} at </p>
+            <div className="commentUsernameBox">
+              <p className="commentUsername">Written by: {this.props.comment.username} at {this.props.comment.timestamp}</p>
+            </div>      
           </div>
           <div className="commentScoreBox">
             <button onClick={(proxy) => {proxy.stopPropagation(); this.upvote()}}>UP</button>
@@ -27,7 +29,7 @@ export default class Comment extends Component {
       </div>
     );
   }
-/*{this.props.comment.timestamp} */
+
   getUserButtons(){
     if(Meteor.user() && Meteor.user()._id == this.props.comment.userId){
       return (

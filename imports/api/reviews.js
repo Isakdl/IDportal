@@ -7,7 +7,20 @@ export const Reviews = new Mongo.Collection('reviews');
 
 
 Meteor.methods({
-  'reviews.add'(){
+  'reviews.add'(text){
+
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized');
+    }
+
+    Reviews.insert({
+      userId: "",
+      username: "",
+      courseId: "",
+      text,
+      timestamp: "",
+      score: 0,
+    });
 
   },
   'reviews.remove'(){
@@ -23,6 +36,6 @@ Meteor.methods({
 
   },
   'reviews.downvote'(){
-    
+
   }
 });

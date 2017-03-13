@@ -1,12 +1,22 @@
 import React, { Component, PropTypes } from 'react';
+
+
 import { Meteor } from 'meteor/meteor';
 import './style.css';
 import constants from './../../../../../constants/apiConstants';
+import eventConstants from '/imports/constants/eventConstants';
 
 //import ArrowDown from ;
 //<img src='./../../../../../assets/ic_keyboard_arrow_down_black_24px.svg' />
 // Task component - represents a single todo item
 export default class CourseItem extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      eventEmitter: props.eventEmitter,
+    };
+  }
 
   render() {
     return (
@@ -50,7 +60,9 @@ export default class CourseItem extends Component {
   }
 
   onClick(){
-    this.props.onClick(this.props.course);
+    this.state.eventEmitter.emitEvent(eventConstants.PUSH_VIEW_COURSE, [this.props.course]);
+    console.log("event emitted!! course onClick: ");
+    console.log(this.props.course);
   }
 
   upvote(){

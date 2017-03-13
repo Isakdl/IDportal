@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import CourseItem from './courseItem.jsx';
-import { Router, browserHistory } from 'react-router';
 import './style.css';
 
 // Task component - represents a single todo item
@@ -18,15 +17,10 @@ export default class CourseList extends Component {
   getCourses(){
     return (
       this.props.courses.map((course) => (
-        <CourseItem key={course._id} course={course} onClick={this.onClickCourse.bind(this)} />
+        <CourseItem key={course._id} course={course} eventEmitter={this.props.eventEmitter}/>
       ))
     );
   }
-
-  onClickCourse(course){
-    browserHistory.push('/course');
-  }
-
 }
 
 CourseList.propTypes = {

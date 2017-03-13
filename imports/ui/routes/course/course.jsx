@@ -3,25 +3,42 @@ import CourseHeader from './components/courseHeader/courseHeader.jsx';
 import CourseAbout from './components/courseAbout/courseAbout.jsx';
 import CourseComments from './components/courseComments/courseComments.jsx';
 import './style.css';
+import Constants from '/imports/constants/eventConstants';
+
 
 export default class Course extends Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      eventEmitter: this.props.eventEmitter,
+      course: this.props.course,
+    };
+
+  }
+
   render() {
-    return (
-    <div className ="content">
-			<CourseHeader title={this.props.course.title}
-				hp={this.props.course.hp}
-				level= {this.props.course.level}
-				period={this.props.course.period}/>
-			<CourseAbout info={this.props.course.info}/>
-			<CourseComments text={this.props.text}/>
 
-			<section id= "course_2"></section>
-			<section id= "course_3"></section>
-			<section id= "course_4"></section>
-			<section id= "course_5"></section>
-		</div>
+    if(this.state.course){
+      return (
+        <div className ="content">
+    			<CourseHeader title={this.state.course.title}
+    				hp={this.state.course.ects}
+    				level= {this.state.course.level}
+    				period={this.state.course.period}/>
+    			<CourseAbout info={this.state.course.description}/>
+    			<CourseComments text={this.state.text}/>
+    		</div>
 
-    );
+      );
+    } else {
+      return (
+        <div>
+          No course data
+        </div>
+      )
+    }
+
   }
 }
 

@@ -5,10 +5,10 @@ export default class Comment extends Component {
   render() {
     return (
       <div className ="Comment">
-         <h2>comment</h2>
-			   <p>{this.props.commment.text}</p>
-			   <p>{this.props.commment.user}</p>
-			   <p>{this.props.commment.vote}</p>
+        <p>{this.props.comment.text}</p>
+        <p>{this.props.comment.username}</p>
+        <p>{this.props.comment.score}</p>
+
 
 
       </div>
@@ -18,5 +18,5 @@ export default class Comment extends Component {
 }
 
 Comment.propTypes = {
-  comment: PropTypes.object.isRequired,
+  //comment: PropTypes.object.isRequired,
 };

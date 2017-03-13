@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { AccountsServer } from 'meteor/accounts-base';
+import '../imports/api/reviews.js';
 import '../imports/api/courses.js';
+
 
 Meteor.startup(() => {
   Accounts.onCreateUser(function(options, user) {

@@ -7,7 +7,7 @@ import Constants from '/imports/constants/eventConstants';
 
 import { createContainer } from 'meteor/react-meteor-data';
 
-import Reviews from '/imports/api/reviews';
+import { Reviews } from '/imports/api/reviews';
 
 export class Course extends Component {
 
@@ -28,9 +28,10 @@ export class Course extends Component {
     			<CourseHeader title={this.state.course.title}
     				ects={this.state.course.ects}
     				level= {this.state.course.level}
-    				period={this.state.course.period}/>
+    				period={this.state.course.period}
+            score={this.props.course.score}/>
     			<CourseAbout info={this.state.course.description}/>
-    			<CourseComments text={this.state.text}/>
+    			<CourseComments course={this.state.course} comments={this.props.comments}/>
     		</div>
 
       );
@@ -49,8 +50,10 @@ Course.propTypes = {
   course: PropTypes.object.isRequired,
 };
 
-export default createContainer(() => {
+export default createContainer(({course}) => {
+  let reviews = Reviews.find({courseId: course._id}).fetch();
+  console.log(reviews)
   return {
-    comments: Reviews.find({courseId: this.state.course._id}).fetch(),
+    comments: reviews ? reviews : [],
   };
 }, Course);

@@ -8,7 +8,7 @@ export const Reviews = new Mongo.Collection('reviews');
 
 Meteor.methods({
   'reviews.add'(text, courseId){
-
+    console.log("reviews.add was called");
     if (!this.userId) {
       throw new Meteor.Error('not-authorized');
     }
@@ -96,7 +96,7 @@ const vote = (reviewId, voteChange) => {
   Review.update(courseId, {$set: {score: review[0].score + voteChange}});
 }
 
-const createReviewObject = (user, courseId, edited, text) => {
+const createReviewObject = (user, courseId, text, edited) => {
   return {
     userId: this.userId,
     username: user.username,

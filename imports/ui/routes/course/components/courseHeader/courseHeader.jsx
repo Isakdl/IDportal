@@ -12,6 +12,7 @@ export default class CourseHeader extends Component {
 							<li>{this.props.ects}</li>
 							<li>{this.props.level}</li>
 							<li>{this.props.period}</li>
+              <li>{this.props.score}</li>
 						</ul>
 					</nav>
 				</section>
@@ -24,4 +25,5 @@ CourseHeader.propTypes = {
   ects: PropTypes.string.isRequired,
   level: PropTypes.string.isRequired,
   period: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
 };

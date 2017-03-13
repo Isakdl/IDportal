@@ -4,7 +4,7 @@ import './style.css';
 import Comments from '/imports/ui/components/comments/comments.jsx'
 
 import {Meteor} from 'meteor/meteor'
-import {Constants} from '/imports/constants/apiConstants'
+import constants from '/imports/constants/apiConstants'
 
 
 export default class CourseComments extends Component {
@@ -13,6 +13,7 @@ export default class CourseComments extends Component {
   {
     this.state =
     {
+      course          : this.props.course,
       comment         : '',
       isCommentsValid : true,
     }
@@ -30,9 +31,8 @@ export default class CourseComments extends Component {
   {
     ts = this.state
 
-    if (ts.isCommentValid)
-    {
-    Meteor.call(Constants.REVIEW_INSERT, ts.comment);
+    if (ts.isCommentValid) {
+      Meteor.call(constants.REVIEWS_INSERT, ts.comment, ts.course._id);
     }
   }
 
@@ -42,7 +42,7 @@ export default class CourseComments extends Component {
 
         <form className="new-comment" >
           <font color={this.state.isCommentValid ? "black" : "red"}>
-            Course Title:
+            Write a review:
           </font>
           <input className="courseInput" type="text" name="title"
             onChange={(e) => this.setState({comment:e.target.value})}
@@ -62,4 +62,5 @@ export default class CourseComments extends Component {
 
 CourseComments.propTypes = {
   comments : PropTypes.array.isRequired,
+  course   : PropTypes.object.isRequired,
 };

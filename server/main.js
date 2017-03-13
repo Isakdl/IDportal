@@ -12,7 +12,7 @@ Meteor.startup(() => {
       user.profile = {};
     }
 
-    user.profile.admin = false;
+    user.profile.admin = true;
 
     return user;
   });

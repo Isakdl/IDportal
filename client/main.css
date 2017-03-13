@@ -1,7 +1,5 @@
 
-
 .container {
-  max-width: 600px;
   margin: 0 auto;
   min-height: 100%;
   background: white;
@@ -137,18 +135,7 @@ header .hide-completed {
   font-family: futura;
 }
 
-h1{
 
-  font-size: 40px;
-  margin: 0;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-h2{
-  font-size: 20px;
-  text-align: center;
-}
 
 #quickfacts{
 

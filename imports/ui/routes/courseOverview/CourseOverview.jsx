@@ -17,7 +17,10 @@ export class CourseOverview extends Component {
   constructor (props) {
     super(props);
     //this.setState = this.setState.bind(this);
-    this.state = { searchTerm: '' };
+    this.state = {
+      searchTerm: '',
+      eventEmitter: this.props.eventEmitter,
+    };
   }
 
   render() {
@@ -27,7 +30,7 @@ export class CourseOverview extends Component {
         <div className="container">
           <SearchInput className="search-input"
             onChange={this.searchUpdated.bind(this)} />
-          <CourseList courses={filteredSearch}/>
+          <CourseList courses={filteredSearch} eventEmitter={this.state.eventEmitter}/>
         </div>
     );
   }

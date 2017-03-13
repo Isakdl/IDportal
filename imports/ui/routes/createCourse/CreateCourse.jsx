@@ -9,7 +9,7 @@ export default class CreateCourse extends Component {
   componentWillMount()
   {
     let course = this.props.course
-    this.state = 
+    this.state =
     {
       title              : course? course.title : '',
       isTitleValid       : true,
@@ -26,7 +26,7 @@ export default class CreateCourse extends Component {
     }
   }
 
-  
+
   isValidMinLength(length, s, sId) {
 
     (s.length > length) ? this.setState({[sId] : true})
@@ -38,12 +38,12 @@ export default class CreateCourse extends Component {
   {
     ts = this.state
 
-    if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid 
+    if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid
                      && ts.isDescriptionValid && ts.isUrlValid && isLevelValid)
     {
-    Meteor.call(constants.COURSES_INSERT, ts.title, ts.ects, ts.speed, 
+    Meteor.call(constants.COURSES_INSERT, ts.title, ts.ects, ts.speed,
         ts.description, ts.url, this.refs.period);
-    }   
+    }
   }
 
   render() {
@@ -54,7 +54,7 @@ export default class CreateCourse extends Component {
             <font color={this.state.isTitleValid ? "black" : "red"}>
               Course Title:
             </font>
-            <input className="courseInput" type="text" name="title" 
+            <input className="courseInput" type="text" name="title"
               onChange={(e) => this.setState({title:e.target.value})}
               onBlur={(e) => this.isValidMinLength (1, this.state.title
                                                    ,"isTitleValid")}
@@ -64,7 +64,7 @@ export default class CreateCourse extends Component {
             <font color={this.state.isLevelValid ? "black" : "red"}>
               Level:
             </font>
-            <input className="courseInput" type="text" name="ects" 
+            <input className="courseInput" type="text" name="ects"
               onChange={(e) => this.setState({level:e.target.value})}
               onBlur={(e) => this.isValidMinLength (1, this.state.level
                                                    , "isLevelValid")}
@@ -74,7 +74,7 @@ export default class CreateCourse extends Component {
             <font color={this.state.isEctsValid ? "black" : "red"}>
               ECTS:
             </font>
-            <input className="courseInput" type="text" name="ects" 
+            <input className="courseInput" type="text" name="ects"
               onChange={(e) => this.setState({ects:e.target.value})}
               onBlur={(e) => this.isValidMinLength (1, this.state.ects
                                                    , "isEctsValid")}
@@ -84,7 +84,7 @@ export default class CreateCourse extends Component {
             <font color={this.state.isSpeedValid ? "black" : "red"}>
               Speed:
             </font>
-            <input className="courseInput" type="text" name="speed" 
+            <input className="courseInput" type="text" name="speed"
               onChange={(e) => this.setState({speed:e.target.value})}
               onBlur={(e) => this.isValidMinLength (5, this.state.speed
                                                    , "isSpeedValid")}
@@ -94,7 +94,7 @@ export default class CreateCourse extends Component {
             <font color={this.state.isDescriptionValid ? "black" : "red"}>
               Description:
             </font>
-            <input className="courseInput" type="text" name="description"  
+            <input className="courseInput" type="text" name="description"
               onChange={(e) => this.setState({description:e.target.value})}
               onBlur={(e) => this.isValidMinLength (5, this.state.description
                                                    ,"isDescriptionValid")}
@@ -127,8 +127,8 @@ export default class CreateCourse extends Component {
               <option value="block4a">Block 4a</option>
               <option value="block4b">Block 4b</option>
             </select>
-  
-            <input type="button" onClick={(e) => this.handleSubmit(e)} 
+
+            <input type="button" onClick={(e) => this.handleSubmit(e)}
               value="Submit"/>
           </form>
         </div>

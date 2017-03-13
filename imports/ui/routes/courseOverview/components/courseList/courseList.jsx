@@ -17,7 +17,7 @@ export default class CourseList extends Component {
   getCourses(){
     return (
       this.props.courses.map((course) => (
-        <CourseItem key={course._id} course={course} />
+        <CourseItem key={course._id} course={course} eventEmitter={this.props.eventEmitter}/>
       ))
     );
   }

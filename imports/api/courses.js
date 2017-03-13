@@ -33,9 +33,15 @@ Meteor.methods({
     Courses.remove(courseId);
   },
   'courses.upvote'(courseId) {
+    if(!this.userId)){
+      throw new Meteor.Error('not-authorized');
+    }
     vote(courseId, 1);
   },
   'courses.downvote'(courseId) {
+    if(!this.userId)){
+      throw new Meteor.Error('not-authorized');
+    }
     vote(courseId, -1);
   },
 

@@ -28,15 +28,26 @@ export default class App extends Component {
     };
 
     this.state.eventEmitter.addListener(Constants.PUSH_VIEW_COURSE, this.viewCourse.bind(this));
-
+    this.state.eventEmitter.addListener(Constants.PUSH_EDIT_COURSE, this.createCourse.bind(this));
+    this.state.eventEmitter.addListener(Constants.PUSH_CREATE_COURSE, this.createCourse.bind(this));
+    this.state.eventEmitter.addListener(Constants.PUSH_OVERVIEW_COURSE, this.overviewCourse.bind(this));
   }
 
-  createCourse() {
+  overviewCourse(){
+    this.setState({
+      route: RouteConstants.COURSE_OVERVIEW,
+      currentCourse: null,
+    });
+  }
 
+  createCourse(course) {
+    this.setState({
+      route: RouteConstants.COURSE_CREATE,
+      currentCourse: course,
+    });
   }
 
   viewCourse(course) {
-    console.log("changing to course view");
     this.setState({
       route: RouteConstants.COURSE_VIEW,
       currentCourse: course,
@@ -58,6 +69,8 @@ export default class App extends Component {
         return <CourseOverview eventEmitter={this.state.eventEmitter}/>
       case RouteConstants.COURSE_VIEW:
         return <CourseView course={this.state.currentCourse} />
+      case RouteConstants.COURSE_CREATE:
+        return <CreateCourse eventEmitter={this.state.eventEmitter} course={this.state.currentCourse} />
       default:
         return <CourseOverview eventEmitter={this.state.eventEmitter}/>
     }

@@ -78,7 +78,7 @@ export default class CourseItem extends Component {
   }
 
   editCourse(){
-
+    this.state.eventEmitter.emitEvent(eventConstants.PUSH_EDIT_COURSE, [this.props.course]);
   }
 
 }

@@ -38,11 +38,12 @@ export default class CreateCourse extends Component {
   {
     ts = this.state
 
+    console.log(this.refs.period.value)
     if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid
                      && ts.isDescriptionValid && ts.isUrlValid && ts.isLevelValid)
     {
     Meteor.call(constants.COURSES_INSERT, ts.title, ts.level, ts.ects, ts.speed,
-        ts.description, ts.url, this.refs.period);
+        ts.description, ts.url, this.refs.period.value);
     }
   }
 
@@ -113,19 +114,19 @@ export default class CreateCourse extends Component {
 
             Period:
 
-            <select className="courseInput" name="period">
-              <option value="block1">Block 1</option>
-              <option value="block1a">Block 1a</option>
-              <option value="block1b">Block 1b</option>
-              <option value="block2">Block 2</option>
-              <option value="block2a">Block 2a</option>
-              <option value="block2b">Block 2b</option>
-              <option value="block3">Block 3</option>
-              <option value="block3a">Block 3a</option>
-              <option value="block3b">Block 3b</option>
-              <option value="block4">Block 4</option>
-              <option value="block4a">Block 4a</option>
-              <option value="block4b">Block 4b</option>
+            <select className="courseInput" name="period" ref="period">
+              <option value="Block 1">Block 1</option>
+              <option value="Block 1a">Block 1a</option>
+              <option value="Block 1b">Block 1b</option>
+              <option value="Block 2">Block 2</option>
+              <option value="Block 2a">Block 2a</option>
+              <option value="Block 2b">Block 2b</option>
+              <option value="Block 3">Block 3</option>
+              <option value="Block 3a">Block 3a</option>
+              <option value="Block 3b">Block 3b</option>
+              <option value="Block 4">Block 4</option>
+              <option value="Block 4a">Block 4a</option>
+              <option value="Block 4b">Block 4b</option>
             </select>
 
             <input type="button" onClick={(e) => this.handleSubmit(e)}

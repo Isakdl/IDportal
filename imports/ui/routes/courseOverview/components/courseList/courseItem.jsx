@@ -61,8 +61,6 @@ export default class CourseItem extends Component {
 
   onClick(){
     this.state.eventEmitter.emitEvent(eventConstants.PUSH_VIEW_COURSE, [this.props.course]);
-    console.log("event emitted!! course onClick: ");
-    console.log(this.props.course);
   }
 
   upvote(){

@@ -29,7 +29,7 @@ export default class CreateCourse extends Component {
 
   isValidMinLength(length, s, sId) {
 
-    (s.length > length) ? this.setState({[sId] : true})
+    (s.length >= length) ? this.setState({[sId] : true})
                           : this.setState({[sId] : false})
   }
 
@@ -39,9 +39,9 @@ export default class CreateCourse extends Component {
     ts = this.state
 
     if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid
-                     && ts.isDescriptionValid && ts.isUrlValid && isLevelValid)
+                     && ts.isDescriptionValid && ts.isUrlValid && ts.isLevelValid)
     {
-    Meteor.call(constants.COURSES_INSERT, ts.title, ts.ects, ts.speed,
+    Meteor.call(constants.COURSES_INSERT, ts.title, ts.level, ts.ects, ts.speed,
         ts.description, ts.url, this.refs.period);
     }
   }
@@ -86,7 +86,7 @@ export default class CreateCourse extends Component {
             </font>
             <input className="courseInput" type="text" name="speed"
               onChange={(e) => this.setState({speed:e.target.value})}
-              onBlur={(e) => this.isValidMinLength (5, this.state.speed
+              onBlur={(e) => this.isValidMinLength (2, this.state.speed
                                                    , "isSpeedValid")}
               style={{borderColor:this.state.isSpeedValid ? "gray" : "red"}}
               placeholder="50%"/>

@@ -81,3 +81,40 @@ const vote = (courseId, voteChange) => {
 
   Courses.update(courseId, {$set: {score: course[0].score + voteChange}});
 }
+
+Meteor.methods({
+  'courses.insert'(title, level, ects, speed, description, url, period) {
+    check(title, String);
+
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized');
+    }
+
+    Courses.insert({
+      title,
+      level,
+      ects,
+      speed,
+      description,
+      url,
+      period,
+      score: 0,
+    });
+  },
+  'courses.remove'(courseId) {
+    check(courseId, String);
+
+    if(!this.userId || !Meteor.user().profile.admin){
+      throw new Meteor.Error('not-authorized');
+    }
+
+    Courses.remove(courseId);
+  },
+  'courses.upvote'(courseId) {
+    vote(courseId, 1);
+  },
+  'courses.downvote'(courseId) {
+    vote(courseId, -1);
+  }
+
+});

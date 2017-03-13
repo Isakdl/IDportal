@@ -3,6 +3,7 @@ import AccountsUIWrapper from '../login/AccountsUIWrapper.jsx';
 import './style.css';
 import { browserHistory } from 'react-router';
 import { Meteor } from 'meteor/meteor';
+import eventConstants from '/imports/constants/eventConstants';
 
 
 export default class Header extends Component {
@@ -12,10 +13,10 @@ export default class Header extends Component {
   createCourse() {
     if(Meteor.user() && Meteor.user().profile.admin) {
       return (
-          <button 
-            onClick={() => browserHistory.push('create')}
-            className="button_1"> 
-            Create Course 
+          <button
+            onClick={() => this.props.eventEmitter.emitEvent(eventConstants.PUSH_CREATE_COURSE, null)}
+            className="button_1">
+            Create Course
           </button>
       );
     }
@@ -30,13 +31,13 @@ export default class Header extends Component {
          <header>
           <h2>ID Portal</h2>
           <AccountsUIWrapper/>
-          <button 
-            onClick={() => browserHistory.push('/')}
-            className="button_1"> 
+          <button
+            onClick={() => this.props.eventEmitter.emitEvent(eventConstants.PUSH_OVERVIEW_COURSE)}
+            className="button_1">
             Home
           </button>
           {this.createCourse()}
-          
+
         </header>
 
 
@@ -45,5 +46,3 @@ export default class Header extends Component {
     );
   }
 }
-
-

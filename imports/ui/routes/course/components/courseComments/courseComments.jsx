@@ -15,5 +15,5 @@ export default class CourseComments extends Component {
 }
 
 CourseComments.propTypes = {
-  comments : propType.array.required,
+  comments : PropTypes.array.isRequired,
 };

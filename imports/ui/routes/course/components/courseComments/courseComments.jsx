@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import './style.css';
-import {Comments} from '/imports/ui/components/comments.jsx'
-import {Comment} from '/imports/ui/components/comment.jsx'
+import {Comments} from '/imports/ui/components/comments/comments.jsx'
+import {Comment} from '/imports/ui/components/comments/comment.jsx'
 
 export default class CourseComments extends Component {
   render() {

@@ -6,8 +6,8 @@ import {Comment} from '/imports/ui/components/comments/comment.jsx'
 export default class CourseComments extends Component {
   render() {
     return (
-      <div>
-
+      <div className="commentSection">
+        <Comments comments={this.props.comments}/>
       </div>
 
     );
@@ -15,5 +15,5 @@ export default class CourseComments extends Component {
 }
 
 CourseComments.propTypes = {
-
+  comments : propType.array.required,
 };

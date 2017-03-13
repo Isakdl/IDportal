@@ -9,7 +9,7 @@ export default class CourseHeader extends Component {
 
 					<nav id= "quickfacts">
 						<ul className="quickfacts_course_1">
-							<li>{this.props.hp}</li>
+							<li>{this.props.ects}</li>
 							<li>{this.props.level}</li>
 							<li>{this.props.period}</li>
 						</ul>
@@ -21,7 +21,7 @@ export default class CourseHeader extends Component {
 
 CourseHeader.propTypes = {
   title: PropTypes.string.isRequired,
-  hp: PropTypes.string.isRequired,
+  ects: PropTypes.string.isRequired,
   level: PropTypes.string.isRequired,
   period: PropTypes.string.isRequired,
 };

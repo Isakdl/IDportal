@@ -6,14 +6,14 @@ export default class Comments extends Component {
     return this.props.comments.map((comment) => (
       <comment key={comment._id} comment={comment} />
     ));
- 
+
   }
   render() {
     return (
       <div className ="Comment">
          <h2>comments</h2>
 			   <p>
-         {rendercomment()}
+            {this.rendercomment()}
          </p>
       </div>
 

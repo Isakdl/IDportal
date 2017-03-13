@@ -11,7 +11,6 @@ import CreateCourse from './routes/createCourse/CreateCourse.jsx';
 // App component - represents the whole app
 export default class App extends Component {
 
-
   render() {
     let course = {
       title: "3D-modellering och siktanalys",

@@ -12,32 +12,23 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized');
     }
     let user = Meteor.user();
-    Reviews.insert(createReviewObject(user, courseId, text, false, false));
+    Reviews.insert(createReviewObject(user, courseId, text, false, null));
 
   },
-  'reviews.remove'(reviewId){
+  'reviews.remove'(reviewId, parentId){
 
+    let review = getReview(reviewId, parentId);
 
-
-    let review = Reviews.find(reviewId).fetch();
-
-    if(review == null || review.length > 1 || review.length == 0){
-      throw new Meteor.Error('invalid review ID');
-    }
-
-    if(!this.userId || !(this.userId === review[0].userId)){
+    if(!this.userId || !(this.userId === review.userId)){
       throw new Meteor.Error('not-authorized');
     }
 
 
     Reviews.remove(reviewId);
   },
-  'reviews.edit'(reviewId, text){
+  'reviews.edit'(reviewId, parentId, text){
 
-    let review = Reviews.find(reviewId).fetch();
-    let user = Meteor.user();
-
-
+    let review = getReview(reviewId, parentId); //Reviews.find(reviewId).fetch();
 
     if(!this.userId || !(this.userId === review.userId)){
       throw new Meteor.Error('not-authorized');
@@ -64,7 +55,7 @@ Meteor.methods({
       throw new Meteor.Error('invalid review ID');
     }
 
-    let comment = createReviewObject(Meteor.user(), parentReview.courseId, text, false, true);
+    let comment = createReviewObject(Meteor.user(), parentReview.courseId, text, false, parentReviewId);
     comment._id = (new Meteor.Collection.ObjectID())._str;
     let replies = parentReview[0].replies;
     replies.push(comment);
@@ -75,36 +66,56 @@ Meteor.methods({
                                       }
                                     });
   },
-  'reviews.upvote'(reviewId){
+  'reviews.upvote'(reviewId, parentId){
     if(!this.userId){
       throw new Meteor.Error('not-authorized');
     }
 
-    vote(reviewId, 1);
+    vote(reviewId, parentId, 1);
   },
-  'reviews.downvote'(reviewId){
+  'reviews.downvote'(reviewId, parentId){
     if(!this.userId){
       throw new Meteor.Error('not-authorized');
     }
 
-    vote(reviewId, -1);
+    vote(reviewId, parentId, -1);
   },
 });
 
+const getReview = (reviewId, parentId) => {
+  let review = null;
+  if(parentId === null){
+    review = Reviews.find(reviewId).fetch();
+  } else {
+    review = Reviews.find(parentId).fetch();
+  }
+
+  console.log(review);
+
+  if(review == null || review.length > 1 || review.length == 0){
+    throw new Meteor.Error('invalid review ID');
+  }
+
+  if(parentId === null){
+    console.log(review[0]);
+    return review[0];
+  } else {
+    console.log("trying to get review");
+    return review[0].replies.find(x => x._id === reviewId)
+  }
+
+}
 
 
-const vote = (reviewId, voteChange) => {
+const vote = (reviewId, parentId, voteChange) => {
 
   //Make sure a vote cannot change more than -1 or +1
   if(!(voteChange === 1 || voteChange === -1)){
     throw new Meteor.Error('invalid vote type');
   }
 
-  let review = Reviews.find(reviewId).fetch();
-
-  if(review == null || review.length > 1 || review.length == 0){
-    throw new Meteor.Error('invalid review ID');
-  }
+  let review = getReview(reviewId, parentId);
+  //let review = Reviews.find(reviewId).fetch();
 
   let reviewVotes = Meteor.user().profile.reviewVotes;
   let voteIndex = reviewVotes.findIndex(obj => obj.reviewId == reviewId);
@@ -130,17 +141,17 @@ const vote = (reviewId, voteChange) => {
 
   Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.reviewVotes": reviewVotes}});
 
-  Reviews.update(reviewId, {$set: {score: review[0].score + voteChange}});
+  Reviews.update(reviewId, {$set: {score: review.score + voteChange}});
 }
 
-const createReviewObject = (user, courseId, text, edited, reply) => {
+const createReviewObject = (user, courseId, text, edited, parentId) => {
   return {
     userId: user._id,
     username: user.username,
     courseId,
     text,
     edited,
-    reply,
+    parentId,
     timestamp: moment().format(),
     score: 0,
     replies: [],

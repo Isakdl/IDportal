@@ -7,13 +7,12 @@ export const Reviews = new Mongo.Collection('reviews');
 
 
 Meteor.methods({
-  'reviews.add'(text, reviewId){
-    console.log("reviews.add was called");
+  'reviews.add'(text, courseId){
     if (!this.userId) {
       throw new Meteor.Error('not-authorized');
     }
     let user = Meteor.user();
-    Reviews.insert(createReviewObject(user, reviewId, text, false));
+    Reviews.insert(createReviewObject(user, courseId, text, false, false));
 
   },
   'reviews.remove'(reviewId){
@@ -52,14 +51,35 @@ Meteor.methods({
                                        }
                                      });
   },
-  'reviews.reply'(){
+  'reviews.reply'(parentReviewId, text){
 
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized');
+    }
+
+
+    let parentReview = Reviews.find(parentReviewId).fetch();
+
+    if(parentReview == null || parentReview.length > 1 || parentReview.length == 0){
+      throw new Meteor.Error('invalid review ID');
+    }
+
+    let comment = createReviewObject(Meteor.user(), parentReview.courseId, text, false, true);
+
+    let replies = parentReview[0].replies;
+    replies.push(comment);
+
+    Reviews.update({_id: parentReviewId}, {$set:
+                                      {
+                                          "replies": replies,
+                                      }
+                                    });
   },
   'reviews.upvote'(reviewId){
     if(!this.userId){
       throw new Meteor.Error('not-authorized');
     }
-    
+
     vote(reviewId, 1);
   },
   'reviews.downvote'(reviewId){
@@ -113,16 +133,14 @@ const vote = (reviewId, voteChange) => {
   Reviews.update(reviewId, {$set: {score: review[0].score + voteChange}});
 }
 
-const createReviewObject = (user, courseId, text, edited) => {
-  console.log("insert review with userId: ");
-  console.log(user._id);
-
+const createReviewObject = (user, courseId, text, edited, reply) => {
   return {
     userId: user._id,
     username: user.username,
     courseId,
     text,
     edited,
+    reply,
     timestamp: moment().format(),
     score: 0,
     replies: [],

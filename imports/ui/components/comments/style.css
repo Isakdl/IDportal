@@ -4,10 +4,7 @@
   justify-content: space-between;
 }
 
-.commentContainer {
-  border-style: solid;
-  border-width: 1px;
-  border-color: rgba(0, 0, 0, 0.24);
+.comment {
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 12px;
@@ -15,33 +12,18 @@
   flex-direction: column;
 }
 
-.courseTextInfoBox {
+.commentUsernameBox {
   display: flex;
-  flex-direction: column;
-}
-
-.courseInfoExtras {
-  display: flex;
-  flex-direction: row;
+  align-self: flex-end;
 }
 
 .commentUsername {
   font-size: 14px;
 }
-
-.courseInfoText {
-  margin-right: 8px;
-}
-
 .commentScoreBox {
   display: flex;
   flex-direction: column;
   align-self: center;
   justify-content: center;
   align-items: center;
-}
-
-.courseAdminButtonContainer {
-  margin-top: 8px;
-  align-self: flex-end;
 }

@@ -9,11 +9,20 @@ export default class Comments extends Component {
     if(!this.props.comments){
       return null;
     }
-    return this.props.comments.map((comment) => (
-      <Comment key={comment._id} comment={comment} />
-    ));
-
+    {this.getNestedComments(this.props.comments)}
   }
+
+  getNestedComments(comments){
+    return comments.map((comment) => (
+      <div className="nestedCommentWrapper">
+        <Comment key={comment._id} comment={comment} />
+        <div className="nestedComment">
+          {this.getNestedComment(comment.replies)}
+        </div>
+      </div>
+    ));
+  }
+
   render() {
     return (
       <div className ="commentsContainer">

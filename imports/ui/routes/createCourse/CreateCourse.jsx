@@ -56,6 +56,7 @@ export default class CreateCourse extends Component {
               Course Title:
             </font>
             <input className="courseInput" type="text" name="title"
+              value={this.state.title}
               onChange={(e) => this.setState({title:e.target.value})}
               onBlur={(e) => this.isValidMinLength (1, this.state.title
                                                    ,"isTitleValid")}
@@ -66,6 +67,7 @@ export default class CreateCourse extends Component {
               Level:
             </font>
             <input className="courseInput" type="text" name="ects"
+              value={this.state.level}
               onChange={(e) => this.setState({level:e.target.value})}
               onBlur={(e) => this.isValidMinLength (1, this.state.level
                                                    , "isLevelValid")}
@@ -76,6 +78,7 @@ export default class CreateCourse extends Component {
               ECTS:
             </font>
             <input className="courseInput" type="text" name="ects"
+              value={this.state.ects}
               onChange={(e) => this.setState({ects:e.target.value})}
               onBlur={(e) => this.isValidMinLength (1, this.state.ects
                                                    , "isEctsValid")}
@@ -86,6 +89,7 @@ export default class CreateCourse extends Component {
               Speed:
             </font>
             <input className="courseInput" type="text" name="speed"
+              value={this.state.speed}
               onChange={(e) => this.setState({speed:e.target.value})}
               onBlur={(e) => this.isValidMinLength (2, this.state.speed
                                                    , "isSpeedValid")}
@@ -96,6 +100,7 @@ export default class CreateCourse extends Component {
               Description:
             </font>
             <input className="courseInput" type="text" name="description"
+              value={this.state.description}
               onChange={(e) => this.setState({description:e.target.value})}
               onBlur={(e) => this.isValidMinLength (5, this.state.description
                                                    ,"isDescriptionValid")}
@@ -106,6 +111,7 @@ export default class CreateCourse extends Component {
               Webpage:
             </font>
             <input className="courseInput" type="text" name="url" max="2000"
+              value={this.state.url}
               onChange={(e) => this.setState({url:e.target.value})}
               onBlur={(e) => this.isValidMinLength (5, this.state.url
                                                    ,"isUrlValid")}

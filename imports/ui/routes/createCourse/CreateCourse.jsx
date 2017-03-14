@@ -21,7 +21,8 @@ export default class CreateCourse extends Component {
         description        : course? course.description : '',
         isDescriptionValid : true,
         url                : course? course.url : '',
-        isUrlValid         : true
+        isUrlValid         : true,
+        period             : course? course.period : 'Block 1'
       }
   }
 
@@ -146,7 +147,8 @@ export default class CreateCourse extends Component {
 
             Period:
 
-            <select className="courseInput" name="period" ref="period">
+            <select value={this.state.period} className="courseInput" 
+            name="period" ref="period">
               <option value="Block 1">Block 1</option>
               <option value="Block 1a">Block 1a</option>
               <option value="Block 1b">Block 1b</option>

@@ -3,7 +3,7 @@ import './style.css';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import constants from './../../../constants/apiConstants';
-import routeConstants from '/imports/constants/routeConstants'
+import eventConstants from '/imports/constants/eventConstants'
 // Task component - represents a single todo item
 export default class CreateCourse extends Component {
 
@@ -36,17 +36,27 @@ export default class CreateCourse extends Component {
                           : this.setState({[sId] : false})
   }
 
+  validateNoBlank(){
+    ts = this.state
+    if (ts.title == '' || ts.ects == '' || ts.speed == '' ||
+        ts.description == '' || ts.url =='' || ts.level == '') {
+      return false
+    }
+    return true
+  }
+
   handleEdit(event) {
     ts = this.state
 
     if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid
                      && ts.isDescriptionValid && ts.isUrlValid && 
                      ts.isLevelValid) {
-      Meteor.call(constants.COURSES_EDIT, this.props.course._id, ts.title, 
-        ts.ects, ts.speed, ts.description, ts.url, ts.level,
-        this.refs.period.value);
-      this.props.eventEmitter.emitEvent(routeConstants.COURSE_CREATE);
-      
+      if (this.validateNoBlank()) {
+        Meteor.call(constants.COURSES_EDIT, this.props.course._id, ts.title, 
+          ts.ects, ts.speed, ts.description, ts.url, ts.level,
+          this.refs.period.value);
+          this.props.eventEmitter.emitEvent(eventConstants.PUSH_OVERVIEW_COURSE)
+      }
     }
   }
 
@@ -55,10 +65,11 @@ export default class CreateCourse extends Component {
 
     if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid
                      && ts.isDescriptionValid && ts.isUrlValid && ts.isLevelValid) {
-      Meteor.call(constants.COURSES_INSERT, ts.title, ts.ects, ts.speed, 
-          ts.description, ts.url, ts.level, this.refs.period.value);
-      this.setState(this.setDefault())
-
+      if(this.validateNoBlank()){
+        Meteor.call(constants.COURSES_INSERT, ts.title, ts.ects, ts.speed, 
+            ts.description, ts.url, ts.level, this.refs.period.value);
+        this.setState(this.setDefault())
+      }
     }
   }
 

@@ -35,13 +35,28 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized');
     }
 
-    Reviews.update({_id: reviewId}, {$set:
-                                      {
-                                        "text": text,
-                                        "edited": true,
-                                        "timestamp": moment().format(),
-                                       }
-                                     });
+    if(parentId === null){
+      Reviews.update({_id: reviewId}, {$set:
+                                        {
+                                          "text": text,
+                                          "edited": true,
+                                          "timestamp": moment().format(),
+                                         }
+                                       });
+    } else {
+      Reviews.update({_id : parentId , "replies._id": reviewId} ,
+        {$set:
+          {
+            "text": text,
+            "edited": true,
+            "timestamp": moment().format(),
+           }
+         });
+    }
+
+
+
+
   },
   'reviews.reply'(parentReviewId, text){
 

@@ -12,7 +12,7 @@ export default class CourseHeader extends Component {
 							<li>{this.props.ects}</li>
 							<li>{this.props.level}</li>
 							<li>{this.props.period}</li>
-              <li>{this.props.score}</li>
+              <li>Votes {this.props.score}</li>
 						</ul>
 					</nav>
 				</section>

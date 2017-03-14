@@ -22,7 +22,7 @@ export default class Comments extends Component {
       <div key={comment._id} className="nestedCommentWrapper">
         <Comment comment={comment} />
         <div key={comment._id}className="nestedComment">
-          {this.getNestedComments(comment.replies)}
+          {/*this.getNestedComments(comment.replies)*/}
         </div>
       </div>
     ));

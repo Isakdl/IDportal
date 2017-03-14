@@ -33,6 +33,10 @@ export default class CourseComments extends Component {
     if (this.state.isCommentValid) {
       this.props.sendCommentCallback(this.state.comment);
     }
+    this.setState({
+      comment: '',
+      isCommentValid: true,
+    })
   }
 
   render() {
@@ -43,6 +47,7 @@ export default class CourseComments extends Component {
             Write a review:
           </font>
           <input className="commentInput" type="text" name="title"
+            value={this.state.comment}
             onChange={(e) => this.setState({comment:e.target.value})}
             onBlur={(e) => this.isValidMinLength (5, this.state.comment
                                                   ,"isCommentValid")}

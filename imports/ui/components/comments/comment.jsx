@@ -29,12 +29,7 @@ export default class Comment extends Component {
                 <p className="commentUsername">Written by: {this.props.comment.username} at {this.props.comment.timestamp}</p>
               </div>
             </div>
-            <div className="commentScoreBox">
-              <button onClick={(proxy) => {proxy.stopPropagation(); this.upvote()}}>UP</button>
-              {this.props.comment.score}
-              <button onClick={(proxy) => {proxy.stopPropagation(); this.downvote()}}>DOWN</button>
-            </div>
-
+            {this.getScoreBox()}
           </div>
           {this.getUserButtons()}
         </div>
@@ -54,6 +49,26 @@ export default class Comment extends Component {
     } else {
       return <p className="commentText">{this.state.text}</p>
     }
+  }
+
+  getScoreBox(){
+    if(Meteor.user()){
+      return (
+        <div className="commentScoreBox">
+          <button onClick={(proxy) => {proxy.stopPropagation(); this.upvote()}}>UP</button>
+          {this.props.comment.score}
+          <button onClick={(proxy) => {proxy.stopPropagation(); this.downvote()}}>DOWN</button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="commentScoreBox">
+          {this.props.comment.score}
+        </div>
+      );
+    }
+
+
   }
 
   getUserButtons(){
@@ -82,7 +97,7 @@ export default class Comment extends Component {
 
   getReplyButton(){
     if(this.props.comment.parentId === null){
-      return <button onClick={(proxy) => {proxy.stopPropagation(); this.replyComment()}}>Reply</button>
+      //return <button onClick={(proxy) => {proxy.stopPropagation(); this.replyComment()}}>Reply</button>
     }
     return null;
   }

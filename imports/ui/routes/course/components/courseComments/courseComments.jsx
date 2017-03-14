@@ -24,12 +24,19 @@ export default class CourseComments extends Component {
   render() {
     return (
       <div className="commentSection">
-        <WriteComment sendCommentCallback={this.handleComment.bind(this)}/>
+        {this.getWriteComments()}
         <Comments comments={this.props.comments}/>
       </div>
-
     );
   }
+
+  getWriteComments(){
+    if(Meteor.user()){
+      return <WriteComment sendCommentCallback={this.handleComment.bind(this)}/>
+    }
+    return null;
+  }
+
 }
 
 CourseComments.propTypes = {

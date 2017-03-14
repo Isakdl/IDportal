@@ -18,8 +18,9 @@ Meteor.methods({
   'reviews.remove'(reviewId, parentId){
 
     let review = getReview(reviewId, parentId);
+    let user = Meteor.user();
 
-    if(!this.userId || !(this.userId === review.userId)){
+    if((!this.userId || !(this.userId === review.userId)) && !user.profile.admin){
       throw new Meteor.Error('not-authorized');
     }
 
@@ -34,13 +35,28 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized');
     }
 
-    Reviews.update({_id: reviewId}, {$set:
-                                      {
-                                        "text": text,
-                                        "edited": true,
-                                        "timestamp": moment().format(),
-                                       }
-                                     });
+    if(parentId === null){
+      Reviews.update({_id: reviewId}, {$set:
+                                        {
+                                          "text": text,
+                                          "edited": true,
+                                          "timestamp": moment().format(),
+                                         }
+                                       });
+    } else {
+      Reviews.update({_id : parentId , "replies._id": reviewId} ,
+        {$set:
+          {
+            "text": text,
+            "edited": true,
+            "timestamp": moment().format(),
+           }
+         });
+    }
+
+
+
+
   },
   'reviews.reply'(parentReviewId, text){
 
@@ -90,17 +106,13 @@ const getReview = (reviewId, parentId) => {
     review = Reviews.find(parentId).fetch();
   }
 
-  console.log(review);
-
   if(review == null || review.length > 1 || review.length == 0){
     throw new Meteor.Error('invalid review ID');
   }
 
   if(parentId === null){
-    console.log(review[0]);
     return review[0];
   } else {
-    console.log("trying to get review");
     return review[0].replies.find(x => x._id === reviewId)
   }
 

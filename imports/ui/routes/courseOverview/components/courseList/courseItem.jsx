@@ -32,12 +32,7 @@ export default class CourseItem extends Component {
               <p className="courseInfoText">{this.props.course.speed}</p>
             </div>
           </div>
-          <div className="courseScoreBox">
-            <button onClick={(proxy) => {proxy.stopPropagation(); this.upvote()}}>UP</button>
-            {this.props.course.score}
-            <button onClick={(proxy) => {proxy.stopPropagation(); this.downvote()}}>DOWN</button>
-          </div>
-
+          {this.getScoreBox()}
         </div>
         {this.getAdminButtons()}
       </div>
@@ -54,9 +49,25 @@ export default class CourseItem extends Component {
         </div>
       );
     }
-
     return null;
+  }
 
+  getScoreBox(){
+    if(Meteor.user()){
+      return (
+        <div className="courseScoreBox">
+          <button onClick={(proxy) => {proxy.stopPropagation(); this.upvote()}}>UP</button>
+          {this.props.course.score}
+          <button onClick={(proxy) => {proxy.stopPropagation(); this.downvote()}}>DOWN</button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="courseScoreBox">
+          {this.props.course.score}
+        </div>
+      );
+    }
   }
 
   onClick(){

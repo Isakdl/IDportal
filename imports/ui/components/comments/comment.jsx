@@ -29,12 +29,7 @@ export default class Comment extends Component {
                 <p className="commentUsername">Written by: {this.props.comment.username} at {this.props.comment.timestamp}</p>
               </div>
             </div>
-            <div className="commentScoreBox">
-              <button onClick={(proxy) => {proxy.stopPropagation(); this.upvote()}}>UP</button>
-              {this.props.comment.score}
-              <button onClick={(proxy) => {proxy.stopPropagation(); this.downvote()}}>DOWN</button>
-            </div>
-
+            {this.getScoreBox()}
           </div>
           {this.getUserButtons()}
         </div>
@@ -56,8 +51,28 @@ export default class Comment extends Component {
     }
   }
 
+  getScoreBox(){
+    if(Meteor.user()){
+      return (
+        <div className="commentScoreBox">
+          <button onClick={(proxy) => {proxy.stopPropagation(); this.upvote()}}>UP</button>
+          {this.props.comment.score}
+          <button onClick={(proxy) => {proxy.stopPropagation(); this.downvote()}}>DOWN</button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="commentScoreBox">
+          {this.props.comment.score}
+        </div>
+      );
+    }
+
+
+  }
+
   getUserButtons(){
-    if(Meteor.user() && Meteor.user()._id == this.props.comment.userId){
+    if(Meteor.user() && (Meteor.user()._id == this.props.comment.userId || Meteor.user().profile.admin)){
       return (
         <div className="commentUserButtons">
           {this.getReplyButton()}
@@ -70,6 +85,9 @@ export default class Comment extends Component {
   }
 
   getEditButton(){
+    if(Meteor.user()._id != this.props.comment.userId){
+      return null;
+    }
     if(this.state.isEditing){
       return <button onClick={(proxy) => {proxy.stopPropagation(); this.sendEditComment(this.state.text)}}>Save</button>
     } else {
@@ -79,7 +97,7 @@ export default class Comment extends Component {
 
   getReplyButton(){
     if(this.props.comment.parentId === null){
-      return <button onClick={(proxy) => {proxy.stopPropagation(); this.replyComment()}}>Reply</button>
+      //return <button onClick={(proxy) => {proxy.stopPropagation(); this.replyComment()}}>Reply</button>
     }
     return null;
   }

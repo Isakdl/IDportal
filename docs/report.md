@@ -43,9 +43,17 @@ description about the course as link to the main site for course description.
 
 ## Flow chart of the GUI
 
-![Flow Chart](GUI-flow.pdf)
+![Flow Chart](Flowchart.pdf)
+
+\newpage
 
 # Compilation and usage
+
+To compile the system you require to download and install meteor.[^1]
+Afterwards to compile and run the program you change directory to the project
+folder and then run the command 'meteor'.
+
+[^1]: http://meteor.com/
 
 # Result and System Description
 
@@ -54,22 +62,32 @@ courses and comment sections. Each user has the ability to view, rate and
 comment courses whereas admin is capable of also editing, creating and removing
 courses and comments.
 
-A course is a database containing 
+A course is a database containing a title, study speed, the amount of ects
+points it yields, url to the main info page, which block during the study year
+it starts and a description. This database is then linked to a comment database
+containing the user ID of the poster as well as the comment content.
 
-## Users
-
-### Admin
+![The comment section](commentsection.png)
 
 ## Adding a course
 
+The admin has the ability to add courses, when doing so, the course info the
+admin submits is validated both on the front end and the back end. The admin can
+later also edit this course.
+
+![The create course view](coursecreate.png)
+
 ## Viewing courses
 
-## Edit courses
+When entering the webpage, the user is greeted by the main course overview where
+the user can see the courses and also what score each course
+has. The way the score system work is that each user can either upvote or
+downvote a course, meaning it gives it a point or removes a point from the
+course's score. The user can only give each course one point or remove one point
+respectively. The user also has the ability to search for specific courses using
+the search bar.
 
-## Comments
-
-## Upvotes and Downvotes
-
+![An example of course information](courseinfo.png)
 
 # Division of labor
 

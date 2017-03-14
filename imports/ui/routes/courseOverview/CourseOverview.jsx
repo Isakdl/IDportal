@@ -28,7 +28,7 @@ export class CourseOverview extends Component {
         createFilter(this.state.searchTerm, KEYS_TO_FILTERS));
     return (
         <div className="container">
-          <SearchInput className="search-input"
+          <SearchInput className="searchinput"
             onChange={this.searchUpdated.bind(this)} />
           <CourseList courses={filteredSearch} eventEmitter={this.state.eventEmitter}/>
         </div>

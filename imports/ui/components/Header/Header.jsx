@@ -31,13 +31,13 @@ export default class Header extends Component {
          <header>
           <h2>ID Portal</h2>
           <AccountsUIWrapper/>
-          <button
-            onClick={() => this.props.eventEmitter.emitEvent(eventConstants.PUSH_OVERVIEW_COURSE)}
-            className="button_1">
-            Home
-          </button>
-          {this.createCourse()}
-
+          <container className="headerButtonContainer">
+            <button
+              onClick={() => this.props.eventEmitter.emitEvent(eventConstants.PUSH_OVERVIEW_COURSE)}
+              className="button_1">
+              Home
+            </button> {this.createCourse()}
+          </container>
         </header>
 
 

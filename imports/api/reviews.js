@@ -18,8 +18,9 @@ Meteor.methods({
   'reviews.remove'(reviewId, parentId){
 
     let review = getReview(reviewId, parentId);
+    let user = Meteor.user();
 
-    if(!this.userId || !(this.userId === review.userId)){
+    if((!this.userId || !(this.userId === review.userId)) && !user.profile.admin){
       throw new Meteor.Error('not-authorized');
     }
 

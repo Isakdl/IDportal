@@ -3,27 +3,30 @@ import './style.css';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import constants from './../../../constants/apiConstants';
+import routeConstants from '/imports/constants/routeConstants'
 // Task component - represents a single todo item
 export default class CreateCourse extends Component {
 
-  componentWillMount()
-  {
+  setDefault() {
     let course = this.props.course
-    this.state =
-    {
-      title              : course? course.title : '',
-      isTitleValid       : true,
-      level              : course? course.level : '',
-      isLevelValid       : true,
-      ects               : course? course.ects : '',
-      isEctsValid        : true,
-      speed              : course? course.speed : '',
-      isSpeedValid       : true,
-      description        : course? course.description : '',
-      isDescriptionValid : true,
-      url                : course? course.url : '',
-      isUrlValid         : true
-    }
+      return {
+        title              : course? course.title : '',
+        isTitleValid       : true,
+        level              : course? course.level : '',
+        isLevelValid       : true,
+        ects               : course? course.ects : '',
+        isEctsValid        : true,
+        speed              : course? course.speed : '',
+        isSpeedValid       : true,
+        description        : course? course.description : '',
+        isDescriptionValid : true,
+        url                : course? course.url : '',
+        isUrlValid         : true
+      }
+  }
+
+  componentWillMount() {
+    this.state = setDefault()
   }
 
 
@@ -33,17 +36,27 @@ export default class CreateCourse extends Component {
                           : this.setState({[sId] : false})
   }
 
-
-  handleSubmit(event)
-  {
+  handleSubmit(event) {
     ts = this.state
 
-    console.log(this.refs.period.value)
     if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid
-                     && ts.isDescriptionValid && ts.isUrlValid && ts.isLevelValid)
-    {
-    Meteor.call(constants.COURSES_INSERT, ts.title, ts.level, ts.ects, ts.speed,
+                     && ts.isDescriptionValid && ts.isUrlValid && ts.isLevelValid) {
+      Meteor.call(constants.COURSES_EDIT, ts.title, ts.level, ts.ects, ts.speed,
         ts.description, ts.url, this.refs.period.value);
+      this.props.eventEmitter.emit(routeConstants.COURSE_CREATE)
+      
+    }
+  }
+
+  handleSubmit(event) {
+    ts = this.state
+
+    if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid
+                     && ts.isDescriptionValid && ts.isUrlValid && ts.isLevelValid) {
+      Meteor.call(constants.COURSES_INSERT, ts.title, ts.level, ts.ects, ts.speed,
+        ts.description, ts.url, this.refs.period.value);
+      this.setState(setDefault())
+
     }
   }
 
@@ -56,6 +69,7 @@ export default class CreateCourse extends Component {
               Course Title:
             </font>
             <input className="courseInput" type="text" name="title"
+              value={this.state.title}
               onChange={(e) => this.setState({title:e.target.value})}
               onBlur={(e) => this.isValidMinLength (1, this.state.title
                                                    ,"isTitleValid")}
@@ -66,6 +80,7 @@ export default class CreateCourse extends Component {
               Level:
             </font>
             <input className="courseInput" type="text" name="ects"
+              value={this.state.level}
               onChange={(e) => this.setState({level:e.target.value})}
               onBlur={(e) => this.isValidMinLength (1, this.state.level
                                                    , "isLevelValid")}
@@ -76,6 +91,7 @@ export default class CreateCourse extends Component {
               ECTS:
             </font>
             <input className="courseInput" type="text" name="ects"
+              value={this.state.ects}
               onChange={(e) => this.setState({ects:e.target.value})}
               onBlur={(e) => this.isValidMinLength (1, this.state.ects
                                                    , "isEctsValid")}
@@ -86,6 +102,7 @@ export default class CreateCourse extends Component {
               Speed:
             </font>
             <input className="courseInput" type="text" name="speed"
+              value={this.state.speed}
               onChange={(e) => this.setState({speed:e.target.value})}
               onBlur={(e) => this.isValidMinLength (2, this.state.speed
                                                    , "isSpeedValid")}
@@ -96,6 +113,7 @@ export default class CreateCourse extends Component {
               Description:
             </font>
             <input className="courseInput" type="text" name="description"
+              value={this.state.description}
               onChange={(e) => this.setState({description:e.target.value})}
               onBlur={(e) => this.isValidMinLength (5, this.state.description
                                                    ,"isDescriptionValid")}
@@ -106,6 +124,7 @@ export default class CreateCourse extends Component {
               Webpage:
             </font>
             <input className="courseInput" type="text" name="url" max="2000"
+              value={this.state.url}
               onChange={(e) => this.setState({url:e.target.value})}
               onBlur={(e) => this.isValidMinLength (5, this.state.url
                                                    ,"isUrlValid")}
@@ -129,8 +148,10 @@ export default class CreateCourse extends Component {
               <option value="Block 4b">Block 4b</option>
             </select>
 
-            <input type="button" onClick={(e) => this.handleSubmit(e)}
+            <input type="button" onClick={(e) => 
+                this.props.course? this.handleEdit(e) : this.handleSubmit(e)}
               value="Submit"/>
+
           </form>
         </div>
     );
@@ -139,4 +160,4 @@ export default class CreateCourse extends Component {
 
 CreateCourse.propTypes = {
   course: PropTypes.object,
-};
+}

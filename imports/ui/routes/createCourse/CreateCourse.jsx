@@ -26,7 +26,7 @@ export default class CreateCourse extends Component {
   }
 
   componentWillMount() {
-    this.state = setDefault()
+    this.state = this.setDefault()
   }
 
 
@@ -36,14 +36,16 @@ export default class CreateCourse extends Component {
                           : this.setState({[sId] : false})
   }
 
-  handleSubmit(event) {
+  handleEdit(event) {
     ts = this.state
 
     if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid
-                     && ts.isDescriptionValid && ts.isUrlValid && ts.isLevelValid) {
-      Meteor.call(constants.COURSES_EDIT, ts.title, ts.level, ts.ects, ts.speed,
-        ts.description, ts.url, this.refs.period.value);
-      this.props.eventEmitter.emit(routeConstants.COURSE_CREATE)
+                     && ts.isDescriptionValid && ts.isUrlValid && 
+                     ts.isLevelValid) {
+      Meteor.call(constants.COURSES_EDIT, this.props.course._id, ts.title, 
+        ts.ects, ts.speed, ts.description, ts.url, ts.level,
+        this.refs.period.value);
+      this.props.eventEmitter.emitEvent(routeConstants.COURSE_CREATE);
       
     }
   }
@@ -53,9 +55,9 @@ export default class CreateCourse extends Component {
 
     if (ts.isTitleValid && ts.isEctsValid && ts.isSpeedValid
                      && ts.isDescriptionValid && ts.isUrlValid && ts.isLevelValid) {
-      Meteor.call(constants.COURSES_INSERT, ts.title, ts.level, ts.ects, ts.speed,
-        ts.description, ts.url, this.refs.period.value);
-      this.setState(setDefault())
+      Meteor.call(constants.COURSES_INSERT, ts.title, ts.ects, ts.speed, 
+          ts.description, ts.url, ts.level, this.refs.period.value);
+      this.setState(this.setDefault())
 
     }
   }

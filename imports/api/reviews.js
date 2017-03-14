@@ -65,7 +65,7 @@ Meteor.methods({
     }
 
     let comment = createReviewObject(Meteor.user(), parentReview.courseId, text, false, true);
-
+    comment._id = (new Meteor.Collection.ObjectID())._str;
     let replies = parentReview[0].replies;
     replies.push(comment);
 
@@ -102,7 +102,7 @@ const vote = (reviewId, voteChange) => {
 
   let review = Reviews.find(reviewId).fetch();
 
-  if(review == null || review.length > 1){
+  if(review == null || review.length > 1 || review.length == 0){
     throw new Meteor.Error('invalid review ID');
   }
 

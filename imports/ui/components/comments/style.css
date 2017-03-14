@@ -27,3 +27,21 @@
   justify-content: center;
   align-items: center;
 }
+
+.nestedComment {
+  margin-left: 16px;
+}
+
+.writeCommentWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.new-comment {
+  display: flex;
+  flex-direction: column;
+}
+
+.commentInput {
+  width: 100%;
+}

@@ -16,7 +16,7 @@ export default class CourseComments extends Component {
     this.state =
     {
       comment         : '',
-      isCommentsValid : true,
+      isCommentValid : true,
     }
   }
 

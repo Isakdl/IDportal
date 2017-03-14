@@ -9,15 +9,21 @@ export default class Comments extends Component {
     if(!this.props.comments){
       return null;
     }
-    {this.getNestedComments(this.props.comments)}
+    return this.getNestedComments(this.props.comments);
   }
 
   getNestedComments(comments){
+
+    if(comments.length == 0){
+      return null;
+    }
+
     return comments.map((comment) => (
-      <div className="nestedCommentWrapper">
-        <Comment key={comment._id} comment={comment} />
-        <div className="nestedComment">
-          {this.getNestedComment(comment.replies)}
+      <div key={comment._id} className="nestedCommentWrapper">
+        {console.log("New comment: " + comment._id)}
+        <Comment comment={comment} />
+        <div key={comment._id}className="nestedComment">
+          {this.getNestedComments(comment.replies)}
         </div>
       </div>
     ));
@@ -27,9 +33,9 @@ export default class Comments extends Component {
     return (
       <div className ="commentsContainer">
          <h2>comments</h2>
-			   <p>
+			   <div>
             {this.rendercomment()}
-         </p>
+         </div>
       </div>
 
     );

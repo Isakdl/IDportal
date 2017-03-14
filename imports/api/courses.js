@@ -6,7 +6,33 @@ import apiConstants from '/imports/constants/apiConstants';
 export const Courses = new Mongo.Collection('courses');
 
 Meteor.methods({
-  'courses.insert'(title, ects, speed, description, url, period) {
+  'courses.edit'(courseId, title, ects, speed, description, url, level, period) {
+    check(title, String);
+
+    if (!this.userId) {
+      throw new Meteor.Error('not-authorized');
+    }
+    let course = Courses.find(courseId).fetch();
+
+    if(course == null){
+      throw new Meteor.Error('invalid course ID');
+    }
+
+    Courses.update(
+      {_id : courseId},
+      {$set: {        
+        "title" : title,
+        "ects" : ects,
+        "speed" : speed,
+        "description" : description,
+        "url" : url,
+        "level" : level,
+        "period" : period
+        }
+      }
+    );
+  },
+  'courses.insert'(title, ects, speed, description, url, level, period) {
     check(title, String);
 
     if (!this.userId) {
@@ -19,6 +45,7 @@ Meteor.methods({
       speed,
       description,
       url,
+      level,
       period,
       score: 0,
     });

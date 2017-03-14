@@ -57,7 +57,7 @@ export default class Comment extends Component {
   }
 
   getUserButtons(){
-    if(Meteor.user() && Meteor.user()._id == this.props.comment.userId){
+    if(Meteor.user() && (Meteor.user()._id == this.props.comment.userId || Meteor.user().profile.admin)){
       return (
         <div className="commentUserButtons">
           {this.getReplyButton()}
@@ -70,6 +70,9 @@ export default class Comment extends Component {
   }
 
   getEditButton(){
+    if(Meteor.user()._id != this.props.comment.userId){
+      return null;
+    }
     if(this.state.isEditing){
       return <button onClick={(proxy) => {proxy.stopPropagation(); this.sendEditComment(this.state.text)}}>Save</button>
     } else {

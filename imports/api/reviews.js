@@ -91,17 +91,13 @@ const getReview = (reviewId, parentId) => {
     review = Reviews.find(parentId).fetch();
   }
 
-  console.log(review);
-
   if(review == null || review.length > 1 || review.length == 0){
     throw new Meteor.Error('invalid review ID');
   }
 
   if(parentId === null){
-    console.log(review[0]);
     return review[0];
   } else {
-    console.log("trying to get review");
     return review[0].replies.find(x => x._id === reviewId)
   }
 

@@ -20,7 +20,6 @@ export default class Comments extends Component {
 
     return comments.map((comment) => (
       <div key={comment._id} className="nestedCommentWrapper">
-        {console.log("New comment: " + comment._id)}
         <Comment comment={comment} />
         <div key={comment._id}className="nestedComment">
           {this.getNestedComments(comment.replies)}

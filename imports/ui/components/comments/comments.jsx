@@ -1,19 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import './style.css';
 
+import Comment from './comment.jsx';
+
+
 export default class Comments extends Component {
   rendercomment() {
+    if(!this.props.comments){
+      return null;
+    }
     return this.props.comments.map((comment) => (
-      <comment key={comment._id} comment={comment} />
+      <Comment key={comment._id} comment={comment} />
     ));
- 
+
   }
   render() {
     return (
-      <div className ="Comment">
+      <div className ="commentsContainer">
          <h2>comments</h2>
 			   <p>
-         {rendercomment()}
+            {this.rendercomment()}
          </p>
       </div>
 
@@ -22,6 +28,5 @@ export default class Comments extends Component {
 }
 
 Comments.propTypes = {
-  comments: PropTypes.array.isRequired,
-
+  //comments: PropTypes.array.isRequired,
 };

@@ -46,6 +46,6 @@ CourseOverview.propTypes = {
 
 export default createContainer(() => {
   return {
-    courses: Courses.find({}).fetch(),
+    courses: Courses.find({}, {sort: {score: -1}}).fetch(),
   };
 }, CourseOverview);

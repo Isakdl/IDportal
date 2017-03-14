@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { AccountsServer } from 'meteor/accounts-base';
+import '../imports/api/reviews.js';
 import '../imports/api/courses.js';
+
 
 Meteor.startup(() => {
   Accounts.onCreateUser(function(options, user) {
@@ -14,6 +16,7 @@ Meteor.startup(() => {
 
     user.profile.admin = true;
     user.profile.courseVotes = [];
+    user.profile.reviewVotes = [];
 
     return user;
   });

@@ -1,0 +1,35 @@
+
+.searchinput {
+  padding: 10px 10px;
+  height: 52px;
+  border: 2px;
+  position: relative;
+}
+
+.searchinput::before {
+  display: block;
+  position: absolute;
+  width: 100px;
+  border: 2px;
+  z-index: 3;
+  height: 15px;
+  font-size: 20px;
+  top: 11px;
+  left: 16px;
+  line-height: 32px;
+  opacity: 0.6;
+}
+
+.searchinput > input {
+  width: 100%;
+  font-size: 18px;
+  border: 2px;
+  line-height: 22px;
+  padding: 5px 10px 5px 25px;
+  height: 32px;
+  position: relative;
+}
+
+.searchinput > input:focus {
+  border: 2px;
+}
